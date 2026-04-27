@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>jio — v2 · Fawn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..700;1,8..60,200..700&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Neutrals — v2 tuned for Fawn: very slightly warmer paper */
+    --bg: #FAF8F2;
+    --surface: #FFFFFF;
+    --surface-2: #F3F1E9;
+    --border: #E0DDD1;
+    --border-strong: #C2BFB2;
+
+    /* Text — warmer neutrals to marry Fawn */
+    --text: #16140F;
+    --text-2: #6B675C;
+    --text-3: #9B978B;
+    --text-4: #C2BFB2;
+
+    /* Semantic — Fawn as accent */
+    --accent: #A07E58;
+    --accent-tint: #E6DACB;
+    --info: #6A9BCC;
+    --info-tint: #E0EDF7;
+    --success: #788C5D;
+    --success-tint: #E8EDDF;
+    --danger: #C4453C;
+    --danger-tint: #FCEEED;
+    --warn: #C7923E;
+    --warn-tint: #FDF3E3;
+
+    /* Radius */
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 16px;
+    --r-pill: 9999px;
+
+    /* Shadow */
+    --sh-xs: 0 1px 2px rgba(20,20,19,0.04);
+    --sh-sm: 0 2px 8px rgba(20,20,19,0.06);
+    --sh-md: 0 4px 16px rgba(20,20,19,0.12);
+
+    /* Type */
+    --font-sans: "DM Sans", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+    --font-serif: "Source Serif 4", "Noto Serif SC", Georgia, serif;
+    --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --font-wordmark: "EB Garamond", "Source Serif 4", Georgia, serif;
+    --font-cn-serif: "Noto Serif SC", serif;
+
+    /* Accent-on-dark — logo seal + wordmark shift here in dark mode */
+    --accent-on-dark: #A07E58;
+  }
+
+  [data-theme="dark"] {
+    --bg: #2D271C;
+    --surface: #362F24;
+    --surface-2: #3E372B;
+    --border: #483F33;
+    --border-strong: #554C40;
+    --text: #F3EEE2;
+    --text-2: #B0A898;
+    --text-3: #7F7869;
+    --text-4: #554C40;
+    --accent-tint: #473923;
+    --info-tint: #1F2D3B;
+    --success-tint: #232C1C;
+    --danger-tint: #3A1E1B;
+    --warn-tint: #3A2D18;
+    --sh-xs: 0 1px 2px rgba(0,0,0,0.3);
+    --sh-sm: 0 2px 8px rgba(0,0,0,0.4);
+    --sh-md: 0 4px 16px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  /* Layout chrome */
+  .app {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+  }
+  @media (max-width: 900px) { .app { grid-template-columns: 1fr; } .sidebar { position: sticky; top:0; z-index: 20; } }
+
+  .sidebar {
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  @media (max-width: 900px) {
+    .sidebar { height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 16px 20px; }
+  }
+
+  .brand-mark {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 28px;
+    text-decoration: none; color: var(--text);
+  }
+  .brand-mark .sig { width: 28px; height: 28px; }
+  .brand-mark .name { font-family: var(--font-serif); font-weight: 300; font-size: 22px; letter-spacing: -0.01em; }
+  .brand-mark .tag { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; margin-left: auto; }
+
+  .nav-group { margin-bottom: 22px; }
+  .nav-group .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 0 8px 8px;
+  }
+  .nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    color: var(--text-2);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .nav a:hover { background: var(--surface-2); color: var(--text); }
+  .nav a.active {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+    box-shadow: var(--sh-xs);
+  }
+  .nav a .num { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); margin-left: auto; }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+  }
+  .sidebar-footer .row { display: flex; justify-content: space-between; padding: 4px 0; }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    background: transparent;
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--text); border-color: var(--border-strong); }
+
+  /* Main */
+  main { min-width: 0; }
+  .content { padding: 40px 56px 120px; max-width: 1180px; }
+  @media (max-width: 900px) { .content { padding: 28px 24px 80px; } }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+  h1.page-title {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+  }
+  @media (max-width: 700px) { h1.page-title { font-size: 34px; } }
+
+  .page-lede {
+    max-width: 62ch;
+    color: var(--text-2);
+    font-size: 16px;
+    line-height: 1.6;
+    text-wrap: pretty;
+    margin: 0 0 40px;
+  }
+
+  h2.section {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.005em;
+    margin: 56px 0 6px;
+  }
+  h2.section .en { color: var(--text-3); font-weight: 400; margin-left: 8px; font-size: 15px; }
+
+  h3.sub {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 15px;
+    margin: 28px 0 10px;
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+  }
+
+  p { color: var(--text-2); margin: 0 0 14px; text-wrap: pretty; }
+  p.body { color: var(--text); }
+  .muted { color: var(--text-3); }
+
+  .hr { height: 1px; background: var(--border); margin: 40px 0; border: none; }
+
+  /* Utility: card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 20px;
+  }
+
+  /* Page fade */
+  .page { animation: fade .25s ease; }
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Anchors */
+  a.in { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  a.in:hover { border-color: var(--accent); }
+
+  /* Scroll to section offset */
+  :target { scroll-margin-top: 24px; }
+
+  /* Code */
+  code, .mono { font-family: var(--font-mono); font-size: 12.5px; }
+  code.inline { background: var(--surface-2); padding: 1px 6px; border-radius: var(--r-sm); color: var(--text); }
+
+  /* Do / Don't */
+  .dd { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 8px; }
+  @media (max-width: 700px) { .dd { grid-template-columns: 1fr; } }
+  .dd .col { border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; background: var(--surface); }
+  .dd .col .head { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+  .dd .do .head { color: var(--success); }
+  .dd .dont .head { color: var(--danger); }
+
+  /* Table */
+  table.spec { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.spec th, table.spec td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.spec th { font-weight: 600; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+  table.spec td .mono { font-size: 12px; }
+</style>
+
+<!-- React + Babel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="src/shared.jsx"></script>
+<script type="text/babel" src="src/tokens.jsx"></script>
+<script type="text/babel" src="src/brand.jsx"></script>
+<script type="text/babel" src="src/logo.jsx"></script>
+<script type="text/babel" src="src/color.jsx"></script>
+<script type="text/babel" src="src/type.jsx"></script>
+<script type="text/babel" src="src/layout.jsx"></script>
+<script type="text/babel" src="src/icon.jsx"></script>
+<script type="text/babel" src="src/components.jsx"></script>
+<script type="text/babel" src="src/states.jsx"></script>
+<script type="text/babel" src="src/forms.jsx"></script>
+<script type="text/babel" src="src/motion.jsx"></script>
+<script type="text/babel" src="src/a11y.jsx"></script>
+<script type="text/babel" src="src/app.jsx"></script>
+</body>
+</html>

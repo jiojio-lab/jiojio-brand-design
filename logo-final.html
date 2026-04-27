@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>jio · Logo — Final spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..700&family=DM+Sans:ital,opsz,wght@0,9..40,300..700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet"/>
+
+<style>
+  :root{
+    --bg:#FAF8F2; --surface:#FFFFFF; --surface-2:#F3F1E9;
+    --border:#E0DDD1; --border-strong:#C2BFB2;
+    --text:#16140F; --text-2:#6B675C; --text-3:#9B978B;
+    --fawn:#A07E58; --fawn-deep:#7A5E3E; --fawn-darker:#5E4730; --fawn-tint:#E6DACB;
+    --dark-bg:#2D271C; --dark-text:#F3EEE2; --dark-text-2:#B0A898;
+    /* single source of truth for logo color — both wordmark & seal read from this */
+    --accent:var(--fawn-deep);
+    --accent-on-dark:var(--fawn);
+    --font-sans:"DM Sans",system-ui,sans-serif;
+    --font-serif:"Source Serif 4",Georgia,serif;
+    --font-wm:"EB Garamond",serif;
+    --font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    --font-cn:"Noto Serif SC",serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1280px;margin:0 auto;padding:56px 48px 160px}
+  @media(max-width:720px){.wrap{padding:32px 20px 80px}}
+  .kicker{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fawn);margin:0 0 14px}
+  h1{font-family:var(--font-serif);font-weight:300;font-size:52px;line-height:1.04;letter-spacing:-.02em;margin:0 0 18px}
+  .lede{max-width:64ch;color:var(--text-2);font-size:16px;line-height:1.7;margin:0 0 40px}
+  .muted{color:var(--text-3);font-size:12px;font-family:var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
+  code{font-family:var(--font-mono);font-size:12.5px;background:var(--surface-2);padding:1px 6px;border-radius:4px}
+  .back{display:inline-flex;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--text-3);text-decoration:none;margin-bottom:28px}
+
+  .section{border-top:1px solid var(--border);padding:64px 0 24px}
+  .section.first{border-top:none;padding-top:0}
+  .section-head{display:grid;grid-template-columns:180px 1fr;align-items:baseline;gap:32px;margin-bottom:32px}
+  @media(max-width:720px){.section-head{grid-template-columns:1fr}}
+  .sec-num{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--fawn)}
+  .sec-name{font-family:var(--font-serif);font-weight:300;font-size:34px;letter-spacing:-.01em;margin-bottom:10px}
+  .sec-note{color:var(--text-2);font-size:14px;max-width:60ch;line-height:1.7}
+
+  .stage{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:72px 48px;display:flex;align-items:center;justify-content:center;min-height:280px;position:relative;overflow:hidden}
+  .stage.dark{background:var(--dark-bg);border-color:var(--dark-bg);color:var(--dark-text)}
+  .stage .corner{position:absolute;top:14px;left:16px;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:var(--text-3);text-transform:uppercase}
+  .stage.dark .corner{color:var(--dark-text-2)}
+
+  /* wordmark — inherits currentColor so it tracks the accent via a wrapper */
+  .jio-wm{font-family:var(--font-wm);font-weight:500;letter-spacing:-.005em;color:var(--accent);line-height:1}
+  .on-dark .jio-wm{color:var(--accent-on-dark)}
+  /* seal uses currentColor via fill=var(--accent) — keep the SVG fills pointing at the token */
+
+  /* lockup */
+  .lockup{display:flex;align-items:center;gap:26px}
+  .lockup .divider{width:1px;background:var(--border-strong);align-self:stretch}
+  .on-dark .lockup .divider{background:#5F574A}
+
+  /* split: primary lockup showcases */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:860px){.two{grid-template-columns:1fr}}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.three{grid-template-columns:1fr}}
+
+  /* ladder */
+  .ladder{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;display:flex;align-items:flex-end;gap:44px;flex-wrap:wrap}
+  .ladder-cell{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .ladder-cell .size{font-family:var(--font-mono);font-size:10px;color:var(--text-3);letter-spacing:.08em}
+
+  /* apps */
+  .apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+  .app{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:160px;gap:14px;text-align:center}
+  .app.dark{background:var(--dark-bg);border-color:var(--dark-bg);color:var(--dark-text)}
+  .app .label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--text-3);text-transform:uppercase}
+  .app.dark .label{color:var(--dark-text-2)}
+
+  /* misuse */
+  .misuse{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .mis{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px 20px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;min-height:180px;gap:14px;text-align:center;position:relative}
+  .mis .x{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:#C84A3E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .mis .mis-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--text-2);text-transform:uppercase;line-height:1.4;max-width:20ch}
+
+  /* clear space diagram */
+  .clearspace{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:40px;position:relative;overflow:hidden;min-height:260px;display:flex;align-items:center;justify-content:center}
+
+  /* spec table */
+  .spec{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:8px}
+  .spec-row{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:16px 20px;border-bottom:1px solid var(--border)}
+  .spec-row:last-child{border-bottom:none}
+  .spec-row .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--text-3);text-transform:uppercase;align-self:start;padding-top:2px}
+  .spec-row .v{font-size:14px;color:var(--text);line-height:1.6}
+  .spec-row .v code{font-size:12px}
+
+  /* color chips */
+  .chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;color:var(--text-2);margin-right:16px}
+  .chip .dot{width:14px;height:14px;border-radius:3px;border:1px solid var(--border)}
+
+  @keyframes stamp{0%{transform:scale(1) rotate(-3deg);opacity:0}25%{transform:scale(1.15) rotate(-3deg);opacity:1}45%,100%{transform:scale(1) rotate(-3deg);opacity:1}}
+
+  .pick-prompt{background:var(--fawn-tint);border-radius:12px;padding:24px 28px;margin-top:48px;font-size:14px;color:var(--text);line-height:1.7}
+  .pick-prompt strong{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="logo-lab-v6.html" class="back">← back to lab</a>
+  <div class="kicker">Logo · Final spec</div>
+  <h1><em style="font-family:var(--font-wm);font-style:italic;font-weight:500">jio</em> — locked.</h1>
+  <p class="lede">Wordmark 定稿 <strong style="color:var(--text)">EB Garamond</strong>,小写 <code>jio</code>。Mark 定稿汉字 <strong style="color:var(--text)">吉</strong>。字标颜色 和 印章底色 都绑定到单一 token <code>--accent</code>,默认 Fawn Deep <code>#7A5E3E</code> — 主题换色时 Logo 自动跟随。以下是完整的使用规范。</p>
+
+  <!-- theme accent binding card -->
+  <div style="display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 20px;margin-bottom:48px;max-width:640px">
+    <div style="width:28px;height:28px;border-radius:6px;background:var(--accent);flex-shrink:0"></div>
+    <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-2);line-height:1.5">
+      <span style="color:var(--text)">--accent</span> → <span style="color:var(--accent)">#7A5E3E</span> (Fawn Deep)<br/>
+      <span style="color:var(--text-3);font-size:11px">wordmark fill · seal bg · both track this token</span>
+    </div>
+  </div>
+
+
+  <!-- ====================================================== -->
+  <!-- 01 · PRIMARY                                             -->
+  <!-- ====================================================== -->
+  <section class="section first">
+    <div class="section-head">
+      <div><div class="sec-num">01</div><div class="sec-name">Primary</div></div>
+      <div class="sec-note">主 lockup:印章在左,字标在右,中间一根 hairline 分隔。用在网页 header、官方物料、邮件签名、文档封面。</div>
+    </div>
+
+    <div class="stage" style="min-height:340px">
+      <span class="corner">Primary lockup</span>
+      <div class="lockup">
+        <svg width="160" height="160" viewBox="0 0 120 120">
+          <rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/>
+          <text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text>
+        </svg>
+        <div class="divider" style="height:120px"></div>
+        <span class="jio-wm" style="font-size:160px">jio</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 02 · ELEMENTS                                            -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">02</div><div class="sec-name">Elements</div></div>
+      <div class="sec-note">字标、印章可以各自独立存在。印章是 favicon / app icon / avatar 的首选。字标用在有文字语境的地方(页眉、版权行、文档标题)。</div>
+    </div>
+
+    <div class="two">
+      <div class="stage">
+        <span class="corner">Wordmark · EB Garamond, 500</span>
+        <span class="jio-wm" style="font-size:128px">jio</span>
+      </div>
+      <div class="stage">
+        <span class="corner">Mark · 吉, Fawn Deep</span>
+        <svg width="200" height="200" viewBox="0 0 120 120">
+          <rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/>
+          <text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 03 · SIZE LADDER                                         -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">03</div><div class="sec-name">Size ladder</div></div>
+      <div class="sec-note">印章在小尺寸下依然立得住 — "吉" 的笔画在 16px 依然清晰。最小使用:印章 16px,字标 14px。</div>
+    </div>
+
+    <div class="muted" style="margin:8px 0 10px">Mark</div>
+    <div class="ladder">
+      <div class="ladder-cell"><svg width="128" height="128" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg><div class="size">128</div></div>
+      <div class="ladder-cell"><svg width="64" height="64" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg><div class="size">64</div></div>
+      <div class="ladder-cell"><svg width="32" height="32" viewBox="0 0 120 120"><rect x="10" y="10" width="100" height="100" rx="4" fill="var(--accent)"/><text x="60" y="86" font-family="Noto Serif SC" font-weight="900" font-size="80" text-anchor="middle" fill="#FAF8F2">吉</text></svg><div class="size">32</div></div>
+      <div class="ladder-cell"><svg width="24" height="24" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="3" fill="var(--accent)"/><text x="60" y="88" font-family="Noto Serif SC" font-weight="900" font-size="92" text-anchor="middle" fill="#FAF8F2">吉</text></svg><div class="size">24</div></div>
+      <div class="ladder-cell"><svg width="16" height="16" viewBox="0 0 120 120"><rect x="4" y="4" width="112" height="112" rx="2" fill="var(--accent)"/><text x="60" y="92" font-family="Noto Serif SC" font-weight="900" font-size="104" text-anchor="middle" fill="#FAF8F2">吉</text></svg><div class="size">16 · favicon</div></div>
+    </div>
+
+    <div class="muted" style="margin:20px 0 10px">Wordmark</div>
+    <div class="ladder">
+      <div class="ladder-cell"><span class="jio-wm" style="font-size:96px">jio</span><div class="size">96</div></div>
+      <div class="ladder-cell"><span class="jio-wm" style="font-size:64px">jio</span><div class="size">64</div></div>
+      <div class="ladder-cell"><span class="jio-wm" style="font-size:40px">jio</span><div class="size">40</div></div>
+      <div class="ladder-cell"><span class="jio-wm" style="font-size:24px">jio</span><div class="size">24</div></div>
+      <div class="ladder-cell"><span class="jio-wm" style="font-size:14px">jio</span><div class="size">14 · min</div></div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 04 · CLEAR SPACE                                         -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">04</div><div class="sec-name">Clear space</div></div>
+      <div class="sec-note">以印章的四分之一高度(X)为最小留白单位。任何方向都不小于 1X。Lockup 中间的 hairline 分隔 = 1X。</div>
+    </div>
+
+    <div class="clearspace">
+      <svg width="560" height="220" viewBox="0 0 560 220">
+        <!-- guide grid -->
+        <g stroke="var(--fawn-tint)" stroke-width="1" stroke-dasharray="3 4" fill="none">
+          <!-- clear space box around the mark -->
+          <rect x="150" y="40" width="120" height="120"/>
+          <rect x="120" y="10" width="180" height="180"/>
+          <!-- measurement ticks -->
+          <line x1="120" y1="10" x2="150" y2="40" stroke="var(--fawn)" stroke-dasharray="none"/>
+          <text x="128" y="30" font-family="JetBrains Mono" font-size="10" fill="var(--accent-on-dark)">1X</text>
+        </g>
+        <!-- mark -->
+        <rect x="164" y="54" width="92" height="92" rx="4" fill="var(--accent)"/>
+        <text x="210" y="122" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text>
+        <!-- divider + wordmark -->
+        <line x1="310" y1="60" x2="310" y2="140" stroke="var(--border-strong)"/>
+        <text x="330" y="130" font-family="EB Garamond" font-weight="500" font-size="98" fill="var(--text)" letter-spacing="-1">jio</text>
+        <!-- X label -->
+        <text x="200" y="200" font-family="JetBrains Mono" font-size="10" fill="var(--text-3)" text-anchor="middle">X = mark height ÷ 4</text>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 05 · COLOR MODES                                         -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">05</div><div class="sec-name">Color modes</div></div>
+      <div class="sec-note">印章色恒定为 <code>#7A5E3E</code>(Fawn Deep)。在 Bark 深色底上,印章切换为 Fawn Main <code>#A07E58</code>,内部"吉"字改为深色底色本身,保持对比。</div>
+    </div>
+
+    <div class="three">
+      <!-- Light -->
+      <div class="stage">
+        <span class="corner">Light · on Bone</span>
+        <div class="lockup">
+          <svg width="80" height="80" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+          <div class="divider" style="height:64px"></div>
+          <span class="jio-wm" style="font-size:76px">jio</span>
+        </div>
+      </div>
+      <!-- Dark -->
+      <div class="stage dark on-dark">
+        <span class="corner">Dark · on Bark</span>
+        <div class="lockup">
+          <svg width="80" height="80" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent-on-dark)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="var(--dark-bg)">吉</text></svg>
+          <div class="divider" style="height:64px"></div>
+          <span class="jio-wm" style="font-size:76px">jio</span>
+        </div>
+      </div>
+      <!-- Monochrome -->
+      <div class="stage">
+        <span class="corner">Mono · single ink</span>
+        <div class="lockup">
+          <svg width="80" height="80" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--text)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+          <div class="divider" style="height:64px"></div>
+          <span class="jio-wm" style="font-size:76px">jio</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:0 4px">
+      <span class="chip"><span class="dot" style="background:var(--fawn-deep)"></span>Fawn Deep · #7A5E3E</span>
+      <span class="chip"><span class="dot" style="background:var(--fawn)"></span>Fawn Main · #A07E58</span>
+      <span class="chip"><span class="dot" style="background:var(--text)"></span>Ink · #16140F</span>
+      <span class="chip"><span class="dot" style="background:var(--bg);border:1px solid var(--border-strong)"></span>Bone · #FAF8F2</span>
+      <span class="chip"><span class="dot" style="background:var(--dark-bg)"></span>Bark · #2D271C</span>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 06 · APPLICATIONS                                        -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">06</div><div class="sec-name">Applications</div></div>
+      <div class="sec-note">Favicon / app icon / avatar 全部使用独立印章。Header、文档、邮件签名使用 lockup 或纯字标。</div>
+    </div>
+
+    <div class="apps">
+      <!-- Favicon bar -->
+      <div class="app">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:20px;padding:8px 16px 8px 8px">
+          <svg width="18" height="18" viewBox="0 0 120 120"><rect x="4" y="4" width="112" height="112" rx="2" fill="var(--accent)"/><text x="60" y="92" font-family="Noto Serif SC" font-weight="900" font-size="104" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+          <span style="font-size:12px;color:var(--text-2)">jio.app</span>
+        </div>
+        <div class="label">Browser tab</div>
+      </div>
+      <!-- App icon -->
+      <div class="app">
+        <div style="width:64px;height:64px;border-radius:14px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px -4px rgba(122,94,62,.35)">
+          <span style="font-family:Noto Serif SC;font-weight:900;font-size:48px;color:#FAF8F2;line-height:1">吉</span>
+        </div>
+        <div class="label">App icon</div>
+      </div>
+      <!-- Avatar -->
+      <div class="app">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--fawn-tint);display:flex;align-items:center;justify-content:center">
+          <svg width="40" height="40" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+        </div>
+        <div class="label">Avatar</div>
+      </div>
+      <!-- Web header -->
+      <div class="app">
+        <div class="lockup">
+          <svg width="32" height="32" viewBox="0 0 120 120"><rect x="10" y="10" width="100" height="100" rx="4" fill="var(--accent)"/><text x="60" y="86" font-family="Noto Serif SC" font-weight="900" font-size="80" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+          <div class="divider" style="height:26px"></div>
+          <span class="jio-wm" style="font-size:32px">jio</span>
+        </div>
+        <div class="label">Web header</div>
+      </div>
+      <!-- On Bark -->
+      <div class="app dark on-dark">
+        <div class="lockup">
+          <svg width="32" height="32" viewBox="0 0 120 120"><rect x="10" y="10" width="100" height="100" rx="4" fill="var(--accent-on-dark)"/><text x="60" y="86" font-family="Noto Serif SC" font-weight="900" font-size="80" text-anchor="middle" fill="var(--dark-bg)">吉</text></svg>
+          <div class="divider" style="height:26px;background:#5F574A"></div>
+          <span class="jio-wm" style="font-size:32px">jio</span>
+        </div>
+        <div class="label">Dark header</div>
+      </div>
+      <!-- Email sig -->
+      <div class="app" style="align-items:flex-start;text-align:left">
+        <div>
+          <div class="lockup">
+            <svg width="24" height="24" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="3" fill="var(--accent)"/><text x="60" y="88" font-family="Noto Serif SC" font-weight="900" font-size="92" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+            <span class="jio-wm" style="font-size:20px;margin-left:10px">jio</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:6px;font-family:var(--font-mono)">a quiet workspace</div>
+        </div>
+        <div class="label">Email signature</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 07 · MOTION                                              -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">07</div><div class="sec-name">Motion · stamp</div></div>
+      <div class="sec-note">Loading 状态:印章"盖"下。旋转 -3°,先放大到 115% 再收回 100%,给一点按压的重量感。</div>
+    </div>
+
+    <div class="stage" style="min-height:220px">
+      <svg width="110" height="110" viewBox="0 0 120 120" style="transform-origin:60px 60px;animation:stamp 2s ease-out infinite">
+        <rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/>
+        <text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 08 · MISUSE                                              -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">08</div><div class="sec-name">Misuse</div></div>
+      <div class="sec-note">别这么做。</div>
+    </div>
+
+    <div class="misuse">
+      <div class="mis">
+        <div class="x">✕</div>
+        <svg width="130" height="62" viewBox="0 0 120 120" preserveAspectRatio="none"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+        <div class="mis-label">不要拉伸变形</div>
+      </div>
+      <div class="mis">
+        <div class="x">✕</div>
+        <svg width="100" height="100" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="#4E7ABF"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+        <div class="mis-label">不要换其他颜色</div>
+      </div>
+      <div class="mis">
+        <div class="x">✕</div>
+        <svg width="100" height="100" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">Ji</text></svg>
+        <div class="mis-label">不要替换印章里的字</div>
+      </div>
+      <div class="mis">
+        <div class="x">✕</div>
+        <span style="font-family:Arial;font-weight:700;font-size:60px;color:var(--text)">jio</span>
+        <div class="mis-label">不要换字体</div>
+      </div>
+      <div class="mis">
+        <div class="x">✕</div>
+        <span class="jio-wm" style="font-size:60px">JIO</span>
+        <div class="mis-label">不要用大写</div>
+      </div>
+      <div class="mis">
+        <div class="x">✕</div>
+        <div class="lockup" style="gap:4px">
+          <svg width="40" height="40" viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="4" fill="var(--accent)"/><text x="60" y="82" font-family="Noto Serif SC" font-weight="900" font-size="66" text-anchor="middle" fill="#FAF8F2">吉</text></svg>
+          <span class="jio-wm" style="font-size:40px">jio</span>
+        </div>
+        <div class="mis-label">不要省略分隔线</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- 09 · SPEC TABLE                                          -->
+  <!-- ====================================================== -->
+  <section class="section">
+    <div class="section-head">
+      <div><div class="sec-num">09</div><div class="sec-name">Spec</div></div>
+      <div class="sec-note">可复制的完整技术规范。</div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-row"><div class="k">Accent token</div><div class="v"><code>--accent</code> = <code>#7A5E3E</code> (Fawn Deep) on light · <code>#A07E58</code> (Fawn Main) on dark. <strong>Wordmark fill and seal background both read from this token</strong> — change one place, both follow.</div></div>
+      <div class="spec-row"><div class="k">Wordmark</div><div class="v"><strong>EB Garamond</strong> · weight 500 · lowercase · letter-spacing −0.005em</div></div>
+      <div class="spec-row"><div class="k">Wordmark color</div><div class="v"><code>var(--accent)</code> — default Fawn Deep on light, Fawn Main on dark</div></div>
+      <div class="spec-row"><div class="k">Mark character</div><div class="v">汉字 <strong style="font-family:var(--font-cn);font-weight:900">吉</strong> · Noto Serif SC · weight 900</div></div>
+      <div class="spec-row"><div class="k">Mark seal</div><div class="v">Rounded square · radius 4 / size · fill <code>var(--accent)</code></div></div>
+      <div class="spec-row"><div class="k">Seal inner text</div><div class="v">Fill Bone <code>#FAF8F2</code> on light, Bark <code>#2D271C</code> on dark</div></div>
+      <div class="spec-row"><div class="k">Mark inner padding</div><div class="v">≈ 12% of side on all four sides (character optically centered)</div></div>
+      <div class="spec-row"><div class="k">Clear space</div><div class="v">X = mark height ÷ 4 · no element or edge within 1X in any direction</div></div>
+      <div class="spec-row"><div class="k">Min size</div><div class="v">Mark 16px · Wordmark 14px · Lockup 20px mark height</div></div>
+      <div class="spec-row"><div class="k">Lockup divider</div><div class="v">1px · <code>#C2BFB2</code> (light) / <code>#5F574A</code> (dark) · height = mark height × 0.75</div></div>
+      <div class="spec-row"><div class="k">Lockup gap</div><div class="v">Mark → divider: 1X · divider → wordmark: 1X</div></div>
+      <div class="spec-row"><div class="k">Motion · stamp</div><div class="v">rotate(−3°) · scale 1 → 1.15 → 1 · 2s · ease-out · opacity 0 → 1 in first 25%</div></div>
+    </div>
+  </section>
+
+
+  <!-- ====================================================== -->
+  <!-- PROMPT                                                   -->
+  <!-- ====================================================== -->
+  <div class="pick-prompt">
+    <strong>Logo 定稿。</strong> 如果 ok,这套规范就作为 design system 的 Logo tab 标准件。下一步可以:<br/>
+    · 生成可下载 SVG 资产(wordmark / mark / lockup,light+dark 各一套)<br/>
+    · 回到主 design system 继续推进 — Color / Typography / Spacing 等章节<br/>
+    · 有任何细节要改(印章圆角、分隔线粗细、lockup 间距、字标 weight 改 400/600…)直接说
+  </div>
+
+</div>
+</body>
+</html>
