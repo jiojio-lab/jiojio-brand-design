@@ -119,7 +119,7 @@ Chinese falls back to Noto Sans SC and Noto Serif SC. English and Chinese sit si
 
 ### The logo · 标识
 
-Two pieces. The wordmark `jio`, lowercase, set in EB Garamond. The seal 吉 on a rounded square. Both read their color from a single token, `--accent`, so changing the theme recolors the logo with no hand-syncing. The wordmark is the default; the seal is reserved for favicon, avatar and other small iconic contexts.
+Two pieces. The wordmark `jio`, lowercase, set in EB Garamond. The seal 吉 on a rounded square. Both read their color from a single token, `--accent-logo`: Fawn Deep `#7A5E3E` on Paper, Fawn `#A07E58` on Bark. Change the token and both recolor with no hand-syncing. The wordmark is the default; the seal is reserved for favicon, avatar and other small iconic contexts.
 
 字标 `jio` 小写、EB Garamond;印章 **吉** 置于圆角方块。两者的颜色都绑在同一个 token 上,换主题时自动跟随。
 
@@ -218,8 +218,9 @@ The sidebar has a light / dark toggle, a 24-swatch accent picker and, in dark mo
 
 | | |
 |---|---|
-| **Wordmark** | `jio` · EB Garamond 500 · lowercase · `var(--accent)` |
-| **Mark** | 吉 · Noto Serif SC · on a Fawn-Deep `#7A5E3E` rounded square |
+| **Wordmark** | `jio` · EB Garamond 500 · lowercase · `var(--accent-logo)` |
+| **Mark** | 吉 · Noto Serif SC · on a `var(--accent-logo)` rounded square |
+| **Logo color** | Fawn Deep `#7A5E3E` on light · Fawn `#A07E58` on dark |
 | **Accent** | Fawn `#A07E58` (step 400 of the Fawn scale) |
 | **Paper · light** | `#FAF8F2` |
 | **Paper · dark** | Bark `#2D271C` |

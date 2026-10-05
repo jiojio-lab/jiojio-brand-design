@@ -12,7 +12,7 @@ const Wordmark = ({ size = 72, color }) => (
     fontSize: size,
     lineHeight: 1,
     letterSpacing: "-0.005em",
-    color: color || "var(--accent)",
+    color: color || "var(--accent-logo)",
     display: "inline-block",
   }}>jio</span>
 );
@@ -25,7 +25,7 @@ const Seal = ({ size = 80, fill, inkFill }) => {
   const inner = size - pad * 2;
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ display: "block", flexShrink: 0 }}>
-      <rect x={pad} y={pad} width={inner} height={inner} rx={radius} fill={fill || "var(--accent)"}/>
+      <rect x={pad} y={pad} width={inner} height={inner} rx={radius} fill={fill || "var(--accent-logo)"}/>
       <text
         x={size / 2}
         y={size / 2}
@@ -92,7 +92,7 @@ const LogoTab = () => {
         kicker="02 · Brand"
         titleEn="Logo system"
         titleZh="标识系统"
-        lede="Two pieces: a wordmark jio set in EB Garamond, and a seal mark 吉 set on a rounded square. Both read from the accent token — change the theme accent and the logo tracks it automatically. The wordmark is the default; the seal is reserved for favicon, avatar, and small iconic contexts."
+        lede="Two pieces: a wordmark jio set in EB Garamond, and a seal mark 吉 set on a rounded square. Both read from the logo token --accent-logo: Fawn Deep on Paper, Fawn on Bark. Pick a non-canonical accent in the sidebar and the logo follows it. The wordmark is the default; the seal is reserved for favicon, avatar, and small iconic contexts."
       />
 
       {/* 01 · Primary lockup */}
@@ -125,7 +125,7 @@ const LogoTab = () => {
             <tbody>
               <tr><td><Copyable value="EB Garamond">Typeface</Copyable></td><td className="mono">EB Garamond · 500 · lowercase</td></tr>
               <tr><td><Copyable value="-0.005em">Tracking</Copyable></td><td className="mono">−0.005em</td></tr>
-              <tr><td>Color</td><td><code className="inline">var(--accent)</code></td></tr>
+              <tr><td>Color</td><td><code className="inline">var(--accent-logo)</code> · Fawn Deep <code className="inline">#7A5E3E</code> on light · Fawn <code className="inline">#A07E58</code> on dark</td></tr>
               <tr><td>Min size</td><td className="mono">14px digital · 6mm print</td></tr>
             </tbody>
           </table>
@@ -183,13 +183,13 @@ const LogoTab = () => {
             <text x="110" y="18" fontFamily="var(--font-mono)" fontSize="10" fill="var(--accent)">1X</text>
             {/* seal */}
             <g transform="translate(144, 44)">
-              <rect width="92" height="92" rx="4" fill="var(--accent)"/>
+              <rect width="92" height="92" rx="4" fill="var(--accent-logo)"/>
               <text x="46" y="46" fontFamily="var(--font-cn-serif)" fontWeight="900" fontSize="80" textAnchor="middle" dominantBaseline="central" fill="var(--bg)">吉</text>
             </g>
             {/* divider */}
             <line x1="290" y1="40" x2="290" y2="140" stroke="var(--border-strong)" strokeWidth="1"/>
             {/* wordmark */}
-            <text x="310" y="120" fontFamily="var(--font-wordmark)" fontWeight="500" fontSize="90" fill="var(--accent)" letterSpacing="-0.5">jio</text>
+            <text x="310" y="120" fontFamily="var(--font-wordmark)" fontWeight="500" fontSize="90" fill="var(--accent-logo)" letterSpacing="-0.5">jio</text>
           </svg>
         </Stage>
       </Section>
@@ -197,7 +197,7 @@ const LogoTab = () => {
       {/* 05 · Color modes */}
       <Section en="Color modes" zh="配色模式">
         <p style={{ marginBottom: 16 }}>
-          <strong>Wordmark fill and seal background both bind to <code className="inline">--accent</code>.</strong> Change the accent swatcher in the sidebar and watch this page update. On dark paper, the accent naturally reads against the ink character inside the seal.
+          <strong>Wordmark fill and seal background both bind to <code className="inline">--accent-logo</code>.</strong> On Paper it resolves to Fawn Deep <code className="inline">#7A5E3E</code>, on Bark to Fawn <code className="inline">#A07E58</code>. Pick a non-canonical accent in the sidebar and the logo follows it; reset to Fawn and it returns to the locked values.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
           <Stage label="Light · on paper" minHeight={200}>
@@ -205,7 +205,7 @@ const LogoTab = () => {
           </Stage>
           <div style={{ position: "relative", background: "var(--text)", border: "1px solid var(--text)", borderRadius: "var(--r-lg)", padding: "56px 32px", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 200 }}>
             <span className="mono" style={{ position: "absolute", top: 12, left: 14, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)" }}>Dark · on ink</span>
-            <Lockup size={64} color="var(--accent)" sealFill="var(--accent)" inkFill="var(--text)"/>
+            <Lockup size={64} color="var(--accent-logo)" sealFill="var(--accent-logo)" inkFill="var(--text)"/>
           </div>
           <Stage label="Mono · single ink" minHeight={200}>
             <Lockup size={64} color="var(--text)" sealFill="var(--text)" inkFill="var(--bg)"/>
@@ -231,7 +231,7 @@ const LogoTab = () => {
           <div className="card" style={{ padding: 24, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", gap: 16, minHeight: 170 }}>
             <div style={{
               width: 64, height: 64, borderRadius: 14,
-              background: "var(--accent)",
+              background: "var(--accent-logo)",
               display: "flex", alignItems: "center", justifyContent: "center",
               boxShadow: "0 4px 16px -4px rgba(0,0,0,0.18)"
             }}>
@@ -302,11 +302,11 @@ const LogoTab = () => {
             { label: "Don't recolor", bad: <Seal size={70} fill="#4E7ABF"/> },
             { label: "Don't swap character", bad: (
               <svg width="70" height="70" viewBox="0 0 70 70">
-                <rect x="8" y="8" width="54" height="54" rx="3" fill="var(--accent)"/>
+                <rect x="8" y="8" width="54" height="54" rx="3" fill="var(--accent-logo)"/>
                 <text x="35" y="35" fontFamily="var(--font-wordmark)" fontWeight="700" fontSize="42" textAnchor="middle" dominantBaseline="central" fill="var(--bg)">J</text>
               </svg>
             )},
-            { label: "Don't change typeface", bad: <span style={{ fontFamily: "Arial, sans-serif", fontWeight: 700, fontSize: 48, color: "var(--accent)" }}>jio</span> },
+            { label: "Don't change typeface", bad: <span style={{ fontFamily: "Arial, sans-serif", fontWeight: 700, fontSize: 48, color: "var(--accent-logo)" }}>jio</span> },
             { label: "Don't uppercase", bad: <Wordmark size={48} /> /* shown uppercased */ },
             { label: "Don't skip divider", bad: (
               <div style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
@@ -318,7 +318,7 @@ const LogoTab = () => {
             <div key={label} className="card" style={{ padding: 16, textAlign: "center", position: "relative", minHeight: 150, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <span style={{ position: "absolute", top: 10, right: 10, width: 20, height: 20, borderRadius: "50%", background: "var(--danger)", color: "#fff", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>✕</span>
               <div style={{ height: 80, display: "flex", alignItems: "center", justifyContent: "center", opacity: 0.92 }}>
-                {i === 4 ? <span style={{ fontFamily: "var(--font-wordmark)", fontWeight: 500, fontSize: 48, color: "var(--accent)", letterSpacing: "-0.005em" }}>JIO</span> : bad}
+                {i === 4 ? <span style={{ fontFamily: "var(--font-wordmark)", fontWeight: 500, fontSize: 48, color: "var(--accent-logo)", letterSpacing: "-0.005em" }}>JIO</span> : bad}
               </div>
               <div className="mono" style={{ fontSize: 10, color: "var(--text-2)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 {label}
@@ -331,15 +331,15 @@ const LogoTab = () => {
       {/* 09 · Spec */}
       <Section en="Spec" zh="技术规范">
         <p style={{ marginBottom: 16 }}>
-          Copy any value. The token bindings mean a single change to <code className="inline">--accent</code> propagates to both wordmark fill and seal background — no hand-syncing needed.
+          Copy any value. The token bindings mean a single change to <code className="inline">--accent-logo</code> propagates to both wordmark fill and seal background — no hand-syncing needed.
         </p>
         <div className="card" style={{ padding: 0 }}>
           <table className="spec" style={{ margin: 0 }}>
             <tbody>
-              <tr><td style={{ width: 180 }}><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Accent token</span></td><td><code className="inline">--accent</code> — currently <Copyable value="#A07E58" style={{ display: "inline-flex", verticalAlign: "baseline" }}>#A07E58 (Fawn)</Copyable>. Both wordmark fill and seal background read from this.</td></tr>
-              <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Wordmark</span></td><td>EB Garamond · weight 500 · lowercase · letter-spacing −0.005em · color <code className="inline">var(--accent)</code></td></tr>
+              <tr><td style={{ width: 180 }}><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Accent token</span></td><td><code className="inline">--accent-logo</code> — <Copyable value="#7A5E3E" style={{ display: "inline-flex", verticalAlign: "baseline" }}>#7A5E3E (Fawn Deep)</Copyable> on light, <Copyable value="#A07E58" style={{ display: "inline-flex", verticalAlign: "baseline" }}>#A07E58 (Fawn)</Copyable> on dark. Both wordmark fill and seal background read from this.</td></tr>
+              <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Wordmark</span></td><td>EB Garamond · weight 500 · lowercase · letter-spacing −0.005em · color <code className="inline">var(--accent-logo)</code></td></tr>
               <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Seal character</span></td><td><span style={{ fontFamily: "var(--font-cn-serif)", fontWeight: 900, fontSize: 18 }}>吉</span> · Noto Serif SC · weight 900</td></tr>
-              <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Seal shape</span></td><td>Rounded square · radius = size ÷ 25 · fill <code className="inline">var(--accent)</code> · inner character fill <code className="inline">var(--bg)</code></td></tr>
+              <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Seal shape</span></td><td>Rounded square · radius = size ÷ 25 · fill <code className="inline">var(--accent-logo)</code> · inner character fill <code className="inline">var(--bg)</code></td></tr>
               <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Seal padding</span></td><td>≈ 12% of side on all four sides · character optically centered</td></tr>
               <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Clear space</span></td><td>X = seal height ÷ 4 · nothing within 1X on any side</td></tr>
               <tr><td><span className="mono" style={{ color: "var(--text-3)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase" }}>Min size</span></td><td>Seal 16px · Wordmark 14px · Lockup 20px seal</td></tr>

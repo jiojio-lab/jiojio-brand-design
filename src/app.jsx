@@ -183,6 +183,10 @@ const App = () => {
 
   React.useEffect(() => {
     document.documentElement.style.setProperty("--accent", accent.value);
+    /* Logo token: locked to Fawn Deep (light) / Fawn (dark) while the canonical accent is active;
+       follows the swatcher when a non-canonical accent is being stress-tested. */
+    const logoColor = accent.value === ACCENTS[0].value ? (theme === "dark" ? "#A07E58" : "#7A5E3E") : accent.value;
+    document.documentElement.style.setProperty("--accent-logo", logoColor);
     /* Dark mode needs a much darker tint — the light tint would be searingly bright on a dark surface.
        Derive from the CURRENT dark paper so the tint harmonizes with the chosen background. */
     const darkTint = mixHex(accent.value, darkPaper.bg, 0.78); /* 22% accent, 78% dark bg */
@@ -220,7 +224,7 @@ const App = () => {
       fontSize: 30,
       lineHeight: 1,
       letterSpacing: "-0.005em",
-      color: "var(--accent)",
+      color: "var(--accent-logo)",
       display: "inline-block",
     }}>jio</span>
   );
@@ -262,6 +266,7 @@ const App = () => {
           <div className="sidebar-footer" style={{ marginTop: 14 }}>
             <div className="row"><span>Version</span><span>2.0.0</span></div>
             <div className="row"><span>Accent</span><span style={{ color: "var(--accent)" }}>Fawn · #A07E58</span></div>
+            <div className="row"><span>Logo</span><span style={{ color: "var(--accent-logo)" }}>{theme === "dark" ? "Fawn · #A07E58" : "Fawn Deep · #7A5E3E"}</span></div>
             <div className="row"><span>Paper</span><span>{theme === "dark" ? `${darkPaper.name} · ${darkPaper.bg}` : "#FAF8F2"}</span></div>
           </div>
         </div>
