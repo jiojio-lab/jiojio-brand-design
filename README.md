@@ -1,106 +1,200 @@
-# jiojio · Brand & Design System
+<p align="center">
+  <img src="docs/screenshots/lockup-light.png" alt="jio — 吉 seal and jio wordmark, primary lockup" width="720">
+</p>
 
-Internal brand guideline + design system for **jiojio**.
-Single-page interactive document, no build step — just open `index.html`.
+<h1 align="center">jiojio · Brand &amp; Design System</h1>
+
+<p align="center">
+  A quiet instrument for focused minds.<br>
+  <sub>为专注的心,造一件安静的工具。</sub>
+</p>
+
+<p align="center">
+  Warm paper, a single accent, three typefaces, no noise.<br>
+  Brand guideline and design system for <strong>jiojio</strong>, shipped as one interactive HTML document.
+</p>
 
 ---
 
-## Quick start
+## Quick start · 快速开始
+
+No build step, no npm. Clone and open.
 
 ```bash
-# Local
-open index.html
-# or
-python3 -m http.server 8000 && open http://localhost:8000
-
-# Push to GitHub
-git init
-git add .
-git commit -m "init: jiojio brand & design system"
-git remote add origin https://github.com/jiojio-lab/jiojio-brand-design.git
-git push -u origin main
+git clone https://github.com/jiojio-lab/jiojio-brand-design.git
+cd jiojio-brand-design
+python3 -m http.server 8000     # then open http://localhost:8000
 ```
 
----
-
-## What's inside
-
-12 tabs across 4 groups, accessible from the left sidebar:
-
-### Brand
-- **01 · Brand** — mission, four operating principles, voice scale (5 axes), copy examples, non-negotiables
-- **02 · Logo** — wordmark default (`jio`, EB Garamond, lowercase), 吉 seal mark, lockup, clear-space, size ladder, do/don't, color binding to `--accent`
-
-### Foundations
-- **03 · Tokens** — three-layer architecture (primitive → semantic → component), live registry, W3C DTCG `tokens.json` + CSS vars export, governance rules
-- **04 · Color** — Fawn 10-step OKLCH-tuned scale, warm Neutral 10-step scale, four semantic families (info / success / warn / danger) at matched lightness, light/dark pairing, WCAG 2.2 contrast matrix, usage do/don't, quick reference
-- **05 · Typography** — three faces (Source Serif 4 / DM Sans / JetBrains Mono), 16-step ramp with leading & tracking, CN/EN mixing rules, OpenType features (`tnum` / `kern` / `ss01` / `halt`), vertical rhythm, hard rules
-- **06 · Layout** — grid, breakpoints, container widths
-- **07 · Icons** — icon set, sizing, stroke rules
-
-### UI
-- **08 · Components** — buttons, cards, inputs, tabs, badges, toasts
-- **09 · States** — empty, loading, error, success patterns
-- **10 · Forms** — inputs, checkbox, radio, toggle, select, validation
-
-### UX
-- **11 · Motion** — easing curves, duration scale, principles, examples
-- **12 · Accessibility** — WCAG matrix, keyboard paths, screen reader patterns
+`index.html` is the design system. `logo-final.html` is the standalone logo spec.
+Fonts come from Google Fonts and React from unpkg, so the first load needs a network connection.
 
 ---
 
-## Theme controls (in the sidebar)
+## Design language · 设计语言
 
-- **Light / Dark** — `Paper` (`#FAF8F2`) ↔ `Bark` (`#2D271C`)
-- **Accent swatcher** — 24 curated accents on the same warm-paper basis. Default is **Fawn** (`#A07E58`).
-- **Dark Paper picker** (visible in dark mode) — 6 warm dark surfaces. Default is **Bark** (`#2D271C`).
+The whole system follows one idea: **remove the noise between a person and the thing they are trying to do.**
+Everything below is a consequence of that.
+整个系统只有一个出发点:**把人和他要做的事之间的噪音去掉。** 下面所有规则都是这个出发点的推论。
 
-All accent / paper changes propagate live through `var(--accent)` / `var(--bg)` token chains, so every component (including the logo wordmark and seal) recolors instantly.
+### Paper and Bark · 纸与树皮
+
+The canvas is never pure white or pure black. Light mode sits on **Paper** `#FAF8F2`, a warm off-white; dark mode sits on **Bark** `#2D271C`, a warm brown-black. Surfaces step up one tier at a time from the canvas, and borders are hairlines that are visible but quiet.
+底色不用纯白或纯黑。亮色模式是暖米色的 **Paper**,暗色模式是暖棕黑的 **Bark**。表面一层比一层亮一级,分割线细到刚好能看见。
+
+### One accent, with a rule · 一个强调色,一条规则
+
+The accent is **Fawn** `#A07E58`, a muted deer-hide brown. It is the only saturated color on the page, and it has a job: **Fawn means output or interaction** — primary buttons, selected states, focus rings, computed totals. **Ink** `#16140F` means **input or fact** — body copy, labels, values the user typed. Info, success, warning and danger exist, but they are tuned to the same lightness so none of them shout.
+强调色是 **Fawn**(鹿皮棕),页面上唯一的饱和色,并且有明确分工:**Fawn = 输出与交互**,**Ink = 输入与事实**。四个语义色(信息 / 成功 / 警告 / 危险)调到同一亮度,谁也不抢戏。
+
+### Three faces · 三副字体
+
+| Role | Face | Why |
+|---|---|---|
+| Display | **Source Serif 4**, weight 300 | Light serif headlines read as calm rather than loud |
+| UI | **DM Sans** | Neutral, compact, pairs with CJK without fighting it |
+| Data | **JetBrains Mono** with `tnum` | Every number is tabular so columns align by default |
+| Wordmark | **EB Garamond**, weight 500 | Only for the `jio` wordmark; never used for body text |
+
+Chinese falls back to Noto Sans SC and Noto Serif SC. English and Chinese sit side by side everywhere in the system, English leading, Chinese as the quieter second line.
+中英并排是系统的常态:英文在前,中文作为更安静的第二行。
+
+### The logo · 标识
+
+Two pieces. The wordmark `jio`, lowercase, set in EB Garamond. The seal 吉 on a rounded square. Both read their color from a single token, `--accent`, so changing the theme recolors the logo with no hand-syncing. The wordmark is the default; the seal is reserved for favicon, avatar and other small iconic contexts.
+字标 `jio` 小写、EB Garamond;印章 **吉** 置于圆角方块。两者的颜色都绑在同一个 token 上,换主题时自动跟随。
+
+<p align="center">
+  <img src="docs/screenshots/lockup-dark.png" alt="Primary lockup on Bark" width="360">
+</p>
+
+### Tokens first · 令牌优先
+
+Colors, radii, shadows and type live in a three-layer token architecture: **primitive → semantic → component**. Components reach into the scale and never invent intermediate values. The Tokens tab exports the whole registry as W3C Design Tokens JSON or plain CSS variables.
+颜色、圆角、投影、字体都走三层令牌:原始值 → 语义 → 组件。组件只取阶梯上的值,不自造中间值。
+
+### What we refuse to do · 永远不做的事
+
+- No emoji in product surfaces. 产品内不出现 emoji。
+- No exclamation marks in UI copy. UI 文案不使用感叹号。
+- No gradients on logo or typography. Logo 和排版不使用渐变。
+- No drop shadow larger than 16px blur. 投影模糊半径不超过 16px。
+- No more than three type weights per surface. 同一界面字重不超过三种。
+- Never disable a button. Warn in red instead. 永不禁用按钮,用红色提示代替。
 
 ---
 
-## File map
+## Screenshots · 截图
 
-```
-index.html           — entry point, CSS tokens (:root + [data-theme="dark"])
-src/
-  app.jsx            — sidebar nav, theme toggle, accent / dark-paper pickers
-  shared.jsx         — Icon, PageHeader, Section, Copyable, DoDontRow
-  brand.jsx          — Brand tab
-  logo.jsx           — Logo tab
-  tokens.jsx         — Tokens tab (architecture + export)
-  color.jsx          — Color tab
-  type.jsx           — Typography tab
-  layout.jsx         — Layout tab
-  icon.jsx           — Icons tab
-  components.jsx     — Components tab
-  states.jsx         — States tab
-  forms.jsx          — Forms tab
-  motion.jsx         — Motion tab
-  a11y.jsx           — Accessibility tab
-```
+**Brand** — mission, principles, voice. Light on Paper, dark on Bark.
 
-No bundler, no npm. React 18 + Babel Standalone are loaded from unpkg with pinned integrity hashes.
+<p align="center">
+  <img src="docs/screenshots/brand-light.png" alt="Brand tab, light" width="49%">
+  <img src="docs/screenshots/brand-dark.png" alt="Brand tab, dark" width="49%">
+</p>
+
+**Logo** — wordmark, seal, lockup, clear space, size ladder.
+
+<p align="center">
+  <img src="docs/screenshots/logo-light.png" alt="Logo tab" width="100%">
+</p>
+
+**Color** — Fawn 10-step scale, warm neutrals, semantic families, WCAG matrix.
+
+<p align="center">
+  <img src="docs/screenshots/color-light.png" alt="Color tab" width="100%">
+</p>
+
+**Typography** — 16-step ramp, CN/EN mixing rules, OpenType features.
+
+<p align="center">
+  <img src="docs/screenshots/type-light.png" alt="Typography tab" width="100%">
+</p>
+
+**Tokens** — three-layer architecture with live resolution and export.
+
+<p align="center">
+  <img src="docs/screenshots/tokens-light.png" alt="Tokens tab" width="100%">
+</p>
+
+**Components and Forms** — every component is live. Hover, click, type.
+
+<p align="center">
+  <img src="docs/screenshots/components-light.png" alt="Components tab, light" width="49%">
+  <img src="docs/screenshots/components-dark.png" alt="Components tab, dark" width="49%">
+</p>
+<p align="center">
+  <img src="docs/screenshots/forms-dark.png" alt="Forms tab, dark" width="100%">
+</p>
 
 ---
 
-## Brand fundamentals
+## What's inside · 内容
+
+Twelve tabs in four groups, reachable from the left sidebar or by URL hash (`index.html#color`).
+
+| # | Tab | Covers |
+|---|---|---|
+| 01 | Brand | Mission, four operating principles, five-axis voice scale, copy examples, non-negotiables |
+| 02 | Logo | Wordmark, 吉 seal, lockup, clear space, size ladder, do / don't, color binding |
+| 03 | Tokens | Primitive → semantic → component cascade, live registry, DTCG JSON + CSS vars export |
+| 04 | Color | Fawn and Neutral 10-step OKLCH-tuned scales, semantic families, light/dark pairs, WCAG 2.2 matrix |
+| 05 | Typography | Three faces, 16-step ramp with leading and tracking, CN/EN mixing, OpenType features, rhythm |
+| 06 | Layout | Grid, breakpoints, container widths |
+| 07 | Icons | Icon set, sizing, stroke rules |
+| 08 | Components | Buttons, cards, inputs, tabs, badges, toasts |
+| 09 | States | Empty, loading, error, success |
+| 10 | Forms | Inputs, checkbox, radio, toggle, select, validation |
+| 11 | Motion | Easing curves, duration scale, principles |
+| 12 | Accessibility | WCAG matrix, keyboard paths, screen reader patterns |
+
+### Theme controls
+
+The sidebar has a light / dark toggle, a 24-swatch accent picker and, in dark mode, a six-paper dark canvas picker. Fawn and Bark are canonical; the rest exist to stress-test the system. Every change propagates live through the token chain, including the logo.
+
+---
+
+## Brand fundamentals · 品牌基础值
 
 | | |
 |---|---|
 | **Wordmark** | `jio` · EB Garamond 500 · lowercase · `var(--accent)` |
-| **Mark** | 吉 (seal · Noto Serif SC) on Fawn-Deep (`#7A5E3E`) ground |
-| **Accent** | Fawn `#A07E58` (canonical, step 400 of the Fawn scale) |
+| **Mark** | 吉 · Noto Serif SC · on a Fawn-Deep `#7A5E3E` rounded square |
+| **Accent** | Fawn `#A07E58` (step 400 of the Fawn scale) |
 | **Paper · light** | `#FAF8F2` |
 | **Paper · dark** | Bark `#2D271C` |
-| **Type stack** | Source Serif 4 (display) · DM Sans (UI) · JetBrains Mono (data) |
-
-### Four operating principles
-1. Clean over decorated
-2. No emoji in product surfaces
-3. Numbers always tabular (mono + `tnum`)
-4. Fawn = output / interaction; Ink = input / fact
+| **Ink** | `#16140F` |
+| **Type stack** | Source Serif 4 · DM Sans · JetBrains Mono |
 
 ---
 
-Generated as an internal artifact. Update in place — there's no separate "source" file.
+## File map · 文件
+
+```
+index.html           entry point; CSS tokens for :root and [data-theme="dark"]
+logo-final.html      standalone logo spec
+src/
+  app.jsx            sidebar nav, theme toggle, accent and dark-paper pickers
+  shared.jsx         Icon, PageHeader, Section, Copyable, DoDontRow
+  brand.jsx          01 Brand
+  logo.jsx           02 Logo
+  tokens.jsx         03 Tokens
+  color.jsx          04 Color
+  type.jsx           05 Typography
+  layout.jsx         06 Layout
+  icon.jsx           07 Icons
+  components.jsx     08 Components
+  states.jsx         09 States
+  forms.jsx          10 Forms
+  motion.jsx         11 Motion
+  a11y.jsx           12 Accessibility
+docs/screenshots/    images used in this README
+```
+
+React 18 and Babel Standalone are loaded from unpkg with pinned versions and integrity hashes. JSX is compiled in the browser, which is fine for a document and keeps the repo dependency-free.
+
+---
+
+## Status · 状态
+
+Version 2.0 · Fawn. The system is a living document; edit the source files in place.

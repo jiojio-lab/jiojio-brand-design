@@ -21,7 +21,7 @@ const MotionTab = () => {
   return (
     <div className="page">
       <PageHeader
-        kicker="10 · Motion"
+        kicker="11 · UX"
         titleEn="Motion"
         titleZh="动效"
         lede="Motion explains cause and effect. It's a verb, not a decoration. If a user can describe what happened without words, the motion worked."

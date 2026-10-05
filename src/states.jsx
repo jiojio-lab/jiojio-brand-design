@@ -36,7 +36,7 @@ const StatesTab = () => {
   return (
     <div className="page">
       <PageHeader
-        kicker="08 · UI"
+        kicker="09 · UI"
         titleEn="States"
         titleZh="状态"
         lede="Empty, loading, error. Three states the default case hides. A product that handles them with care is a product that respects the user's time."
