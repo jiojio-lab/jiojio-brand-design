@@ -204,3 +204,12 @@ React 18 and Babel Standalone are loaded from unpkg with pinned versions and int
 ## Status · 状态
 
 Version 2.0 · Fawn. The system is a living document; edit the source files in place.
+
+---
+
+## License · 许可
+
+Code and documentation are released under the [MIT License](LICENSE).
+The jiojio name, the `jio` wordmark and the 吉 seal are brand assets and are not covered by the license.
+
+代码与文档以 MIT 许可发布。jiojio 名称、`jio` 字标与 吉 印章属于品牌资产,不在许可范围内。
