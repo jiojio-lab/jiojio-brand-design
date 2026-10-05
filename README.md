@@ -16,6 +16,60 @@
 
 ---
 
+## 一图看懂 · At a glance
+
+Twelve tabs in four groups, read top to bottom: Brand sets direction, Foundations supplies the raw material, UI assembles it into components, UX keeps it usable. Every color and size flows through three token layers (bottom row), so one change reaches the logo and the buttons together.
+
+十二个 tab 分四组:Brand 定方向,Foundations 给原料,UI 搭组件,UX 保体验。所有颜色和尺寸都经过三层令牌传递,改一处,logo 和按钮一起变。
+
+```mermaid
+flowchart TB
+  subgraph G1["Brand · 品牌"]
+    direction LR
+    t01["01 Brand<br/>使命 · 原则 · 语气"]
+    t02["02 Logo<br/>字标 · 吉 印章"]
+    t01 ~~~ t02
+  end
+  subgraph G2["Foundations · 基础"]
+    direction LR
+    t03["03 Tokens<br/>三层令牌"]
+    t04["04 Color<br/>色彩"]
+    t05["05 Typography<br/>字体"]
+    t06["06 Layout<br/>布局"]
+    t07["07 Icons<br/>图标"]
+    t03 ~~~ t04 ~~~ t05 ~~~ t06 ~~~ t07
+  end
+  subgraph G3["UI · 界面"]
+    direction LR
+    t08["08 Components<br/>组件"]
+    t09["09 States<br/>状态"]
+    t10["10 Forms<br/>表单"]
+    t08 ~~~ t09 ~~~ t10
+  end
+  subgraph G4["UX · 体验"]
+    direction LR
+    t11["11 Motion<br/>动效"]
+    t12["12 Accessibility<br/>无障碍"]
+    t11 ~~~ t12
+  end
+  subgraph TK["Tokens · 三层令牌"]
+    direction LR
+    P["Primitive<br/>原始值 fawn.400"] --> S["Semantic<br/>语义名 accent"] --> C["Component<br/>组件取值 button.primary.bg"]
+  end
+  G1 ~~~ G2 ~~~ G3 ~~~ G4 ~~~ TK
+  classDef tab fill:#FAF8F2,stroke:#A07E58,color:#16140F
+  classDef tok fill:#E6DACB,stroke:#A07E58,color:#16140F
+  class t01,t02,t03,t04,t05,t06,t07,t08,t09,t10,t11,t12 tab
+  class P,S,C tok
+  style G1 fill:#F3F1E9,stroke:#C2BFB2,color:#16140F
+  style G2 fill:#F3F1E9,stroke:#C2BFB2,color:#16140F
+  style G3 fill:#F3F1E9,stroke:#C2BFB2,color:#16140F
+  style G4 fill:#F3F1E9,stroke:#C2BFB2,color:#16140F
+  style TK fill:#F3F1E9,stroke:#C2BFB2,color:#16140F
+```
+
+---
+
 ## Quick start · 快速开始
 
 No build step, no npm. Clone and open.
@@ -204,6 +258,10 @@ React 18 and Babel Standalone are loaded from unpkg with pinned versions and int
 ## Status · 状态
 
 Version 2.0 · Fawn. The system is a living document; edit the source files in place.
+
+Release history lives in [`docs/releases/`](docs/releases/) (current: v2.0.0), and every change is logged in [`CHANGELOG.md`](CHANGELOG.md).
+
+发布记录见 [`docs/releases/`](docs/releases/),变更清单见 [`CHANGELOG.md`](CHANGELOG.md)。
 
 ---
 

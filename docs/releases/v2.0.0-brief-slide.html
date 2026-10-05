@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Release v2.0.0 · Brief Slide · jiojio Brand Design</title>
+<style>
+:root {
+  --bg: #FAF8F2; --surface: #FFFFFF; --surface-2: #F3F1E9; --surface-3: #EDEAE0;
+  --ink-1: #16140F; --ink-2: #6B675C; --ink-3: #9B978B; --ink-4: #C2BFB2;
+  --line: #E0DDD1; --line-2: #C2BFB2;
+  --accent: #A07E58; --accent-soft: #E6DACB; --accent-ink: #5A442C;
+  --ok: #788C5D; --ok-soft: #E8EDDF; --warn: #C7923E; --warn-soft: #FDF3E3;
+  --risk: #C4453C; --risk-soft: #FCEEED;
+  /* text-on-soft variants: derived from the semantic hues, for 11-12px labels that must stay readable */
+  --ok-ink: #4A5A36; --warn-ink: #7A5514; --risk-ink: #8F2D26;
+  --r-sm: 6px; --r-md: 8px; --ease: cubic-bezier(.2,.7,.2,1);
+  --sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  --mono: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+b, strong { font-weight: 600; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink-1);
+  font-family: var(--sans); font-size: 14px; line-height: 1.55; }
+.mono { font-family: var(--mono); font-feature-settings: 'tnum'; }
+
+.topbar { position: fixed; top: 0; left: 0; right: 0; height: 44px; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+  border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.92); }
+.crumb { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
+.brand-tile { width: 22px; height: 22px; border-radius: var(--r-sm); background: var(--accent);
+  color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+.crumb b { color: var(--ink-1); font-weight: 600; }
+.crumb .sep { color: var(--ink-4); }
+.ver-badge { font-family: var(--mono); font-size: 10.5px; color: var(--accent-ink);
+  background: var(--accent-soft); border-radius: 99px; padding: 2px 9px; font-weight: 500; }
+.topbar .meta { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+
+.snap { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+.page { min-height: 100vh; scroll-snap-align: start; scroll-snap-stop: always;
+  padding: 76px 8vw 56px; display: flex; flex-direction: column; justify-content: center; }
+.page-inner { max-width: 1060px; width: 100%; margin: 0 auto; }
+
+.dots { position: fixed; right: 14px; top: 50%; transform: translateY(-50%); z-index: 10;
+  display: flex; flex-direction: column; gap: 8px; }
+.dots a { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); display: block; transition: background 140ms var(--ease), transform 140ms var(--ease); }
+.dots a.on { background: var(--accent); transform: scale(1.35); }
+.pagenum { position: fixed; bottom: 14px; right: 18px; z-index: 10;
+  font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+.eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-2); margin-bottom: 12px; }
+h1 { margin: 0; font-size: clamp(30px, 4.4vw, 50px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; }
+h2 { margin: 0 0 6px; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; letter-spacing: -0.02em; }
+h3 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+p.lede { color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 800px; margin: 14px 0 0; }
+.sub { color: var(--ink-2); font-size: 13px; line-height: 1.6; }
+
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 99px; vertical-align: middle; }
+.badge.accent { background: var(--accent-soft); color: var(--accent-ink); }
+.badge.ok { background: var(--ok-soft); color: var(--ok-ink); }
+.badge.warn { background: var(--warn-soft); color: var(--warn-ink); }
+.badge.risk { background: var(--risk-soft); color: var(--risk-ink); }
+.badge.ghost { background: var(--surface-3); color: var(--ink-2); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: var(--r-md); padding: 15px 17px; background: var(--surface); }
+.card.soft { background: var(--surface-2); border-color: transparent; }
+.card.accent { background: var(--accent-soft); border-color: transparent; }
+.card.ok { background: var(--ok-soft); border-color: transparent; }
+.card.warn { background: var(--warn-soft); border-color: transparent; }
+.card.risk { background: var(--risk-soft); border-color: transparent; }
+.card p, .card li { font-size: 12.5px; line-height: 1.65; color: var(--ink-2); margin: 0; }
+.card ul { margin: 6px 0 0; padding-left: 17px; }
+.card li { margin-bottom: 4px; }
+
+.kpis { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+.kpi { border: 1px solid var(--line); border-radius: var(--r-md); padding: 13px 18px; min-width: 132px; background: var(--surface); }
+.kpi b { display: block; font-family: var(--mono); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; }
+.kpi span { font-size: 11.5px; color: var(--ink-2); }
+.statusline { display: inline-flex; margin-top: 20px; font-size: 12px; font-weight: 500;
+  background: var(--warn-soft); color: var(--warn-ink); padding: 7px 12px; border-radius: var(--r-sm); }
+
+.pipeline { display: flex; margin: 28px 0 8px; }
+.pipe-step { flex: 1; text-align: center; position: relative; padding: 0 6px; }
+.pipe-step .dot { width: 46px; height: 46px; margin: 0 auto 10px; border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center; background: var(--accent-soft); color: var(--accent-ink); }
+.pipe-step b { display: block; font-size: 13.5px; font-weight: 600; }
+.pipe-step span { font-size: 12px; color: var(--ink-2); display: block; margin-top: 3px; line-height: 1.5; }
+.pipe-step:not(:last-child)::after { content: ""; position: absolute; top: 23px; right: -8px; width: 16px; height: 1px; background: var(--line-2); }
+.icon { width: 20px; height: 20px; flex: none; }
+
+.gloss { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.gloss dt { font-size: 13px; font-weight: 600; margin-bottom: 3px; display: flex; align-items: baseline; gap: 8px; }
+.gloss dt .en { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); font-weight: 400; }
+.gloss dd { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+
+.matrix { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+.mcol { border-radius: var(--r-md); padding: 14px 16px; border: 1px solid var(--line); }
+.mcol ul { margin: 8px 0 0; padding-left: 17px; }
+.mcol li { font-size: 12px; line-height: 1.6; color: var(--ink-2); margin-bottom: 5px; }
+.mcol .note { font-size: 11px; color: var(--ink-2); margin-top: 10px; border-top: 1px dashed var(--line-2); padding-top: 8px; }
+
+table.plain { width: 100%; border-collapse: collapse; font-size: 12.5px; background: var(--surface); }
+table.plain th { text-align: left; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-2); font-weight: 500; padding: 7px 10px;
+  border-bottom: 1px solid var(--line-2); background: var(--surface-3); white-space: nowrap; }
+table.plain td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; color: var(--ink-2); }
+table.plain td b { color: var(--ink-1); }
+table.plain tr:last-child td { border-bottom: none; }
+
+.ba { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.ba > div { padding: 12px 16px; font-size: 12px; line-height: 1.6; }
+.ba .before { background: var(--risk-soft); border-right: 1px solid var(--line); }
+.ba .after { background: var(--ok-soft); }
+.ba .label { display: block; font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+.ba .before .label { color: var(--risk-ink); }
+.ba .after .label { color: var(--ok-ink); }
+.ba code { font-family: var(--mono); font-size: 11px; word-break: break-all; }
+
+.qa4 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.qa4 .card h3 { display: flex; gap: 8px; align-items: center; }
+.qa4 .num { width: 20px; height: 20px; border-radius: var(--r-sm); background: var(--accent-ink); color: #fff;
+  font-family: var(--mono); font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.footnote { margin-top: 14px; font-size: 11px; color: var(--ink-2); }
+
+.card span.mono, .card code, .fix-body span.mono, .fix-body code { white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .grid2, .grid3, .matrix, .qa4, .ba, .gloss { grid-template-columns: 1fr; }
+  .pipeline { flex-direction: column; gap: 14px; }
+  .pipe-step:not(:last-child)::after { display: none; }
+  .page { padding: 64px 6vw 48px; }
+  .dots { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="crumb">
+    <span class="brand-tile">吉</span>
+    <b>jiojio Brand Design</b><span class="sep">›</span><span>Releases</span><span class="sep">›</span><b>v2.0.0</b>
+    <span class="ver-badge">Brief Slide</span>
+  </div>
+  <div class="meta">jiojio-lab/jiojio-brand-design · 2026-10</div>
+</header>
+
+<nav class="dots" id="dots"></nav>
+<div class="pagenum"><span id="pageNow">1</span>/<span id="pageTotal">?</span></div>
+
+<main class="snap" id="snap">
+
+  <!-- 1 封面 -->
+  <section class="page" id="p1">
+    <div class="page-inner">
+      <div class="eyebrow">jiojio Brand Design · Release Brief</div>
+      <h1>Release <span class="mono" style="color:var(--accent)">v2.0.0</span><br/>jiojio 品牌与设计系统，首次公开发布</h1>
+      <p class="lede">一份把品牌规则、颜色、字体、令牌、组件写成可查文档的设计系统，做成一个单页交互 HTML，不需要构建，打开就能看。这是它的第一个 release：设计系统本体加上转为公开仓库时的一轮收口。读完这份简报，你能说出它是什么、解决什么问题、这一版做了什么。</p>
+      <div class="kpis">
+        <div class="kpi"><b>12</b><span>个 tab</span></div>
+        <div class="kpi"><b>4</b><span>个分组</span></div>
+        <div class="kpi"><b>3</b><span>层设计令牌</span></div>
+        <div class="kpi"><b>6</b><span>条永不违反的规则</span></div>
+        <div class="kpi"><b>29</b><span>files changed（对比基线）</span></div>
+      </div>
+      <div class="statusline">状态：已合并待发布（tag 与源码 zip 校验值待回填）。本版没有部署对象，不预支任何使用数据</div>
+    </div>
+  </section>
+
+  <!-- 2 设计系统是什么 -->
+  <section class="page" id="p2">
+    <div class="page-inner">
+      <div class="eyebrow">01 · 概念对齐</div>
+      <h2>设计系统是什么：4 组 12 个 tab，加三层令牌</h2>
+      <p class="lede">左边是内容：品牌、基础、界面、体验四组共 12 个 tab，在同一页的侧栏里切换。右边是机制：所有颜色与尺寸都从「原始值 → 语义名 → 组件取值」三层往下传，换一个主题色，logo 和按钮一起变。</p>
+
+      <svg viewBox="0 0 1040 292" width="100%" role="img" aria-label="4 组 12 个 tab 的结构与三层令牌级联" style="margin-top:18px;display:block">
+        <style>
+          .sg-t { font-family: var(--sans); font-size: 12.5px; fill: var(--ink-1); font-weight: 600; }
+          .sg-s { font-family: var(--sans); font-size: 11px; fill: var(--ink-2); }
+          .sg-m { font-family: var(--mono); font-size: 10px; fill: var(--ink-2); }
+          .sg-h { font-family: var(--mono); font-size: 10px; fill: var(--ink-2); letter-spacing: 0.06em; }
+          .sg-chip { fill: var(--surface); stroke: var(--line-2); stroke-width: 1; }
+          .sg-bar { fill: var(--accent); }
+          .sg-arrow { stroke: var(--ink-2); stroke-width: 1.4; fill: none; }
+        </style>
+        <text class="sg-h" x="0" y="12">TABS · 4 GROUPS / 12</text>
+        <!-- Brand -->
+        <rect class="sg-bar" x="0" y="26" width="3" height="52" rx="1.5"/>
+        <text class="sg-t" x="14" y="48">Brand</text><text class="sg-s" x="14" y="66">品牌</text>
+        <rect class="sg-chip" x="116" y="26" width="102" height="52" rx="6"/><text class="sg-m" x="128" y="46">01</text><text class="sg-t" x="128" y="64">Brand</text>
+        <rect class="sg-chip" x="226" y="26" width="102" height="52" rx="6"/><text class="sg-m" x="238" y="46">02</text><text class="sg-t" x="238" y="64">Logo</text>
+        <!-- Foundations -->
+        <rect class="sg-bar" x="0" y="92" width="3" height="52" rx="1.5"/>
+        <text class="sg-t" x="14" y="114">Foundations</text><text class="sg-s" x="14" y="132">基础</text>
+        <rect class="sg-chip" x="116" y="92" width="102" height="52" rx="6"/><text class="sg-m" x="128" y="112">03</text><text class="sg-t" x="128" y="130">Tokens</text>
+        <rect class="sg-chip" x="226" y="92" width="102" height="52" rx="6"/><text class="sg-m" x="238" y="112">04</text><text class="sg-t" x="238" y="130">Color</text>
+        <rect class="sg-chip" x="336" y="92" width="102" height="52" rx="6"/><text class="sg-m" x="348" y="112">05</text><text class="sg-t" x="348" y="130">Typography</text>
+        <rect class="sg-chip" x="446" y="92" width="102" height="52" rx="6"/><text class="sg-m" x="458" y="112">06</text><text class="sg-t" x="458" y="130">Layout</text>
+        <rect class="sg-chip" x="556" y="92" width="102" height="52" rx="6"/><text class="sg-m" x="568" y="112">07</text><text class="sg-t" x="568" y="130">Icons</text>
+        <!-- UI -->
+        <rect class="sg-bar" x="0" y="158" width="3" height="52" rx="1.5"/>
+        <text class="sg-t" x="14" y="180">UI</text><text class="sg-s" x="14" y="198">界面</text>
+        <rect class="sg-chip" x="116" y="158" width="102" height="52" rx="6"/><text class="sg-m" x="128" y="178">08</text><text class="sg-t" x="128" y="196">Components</text>
+        <rect class="sg-chip" x="226" y="158" width="102" height="52" rx="6"/><text class="sg-m" x="238" y="178">09</text><text class="sg-t" x="238" y="196">States</text>
+        <rect class="sg-chip" x="336" y="158" width="102" height="52" rx="6"/><text class="sg-m" x="348" y="178">10</text><text class="sg-t" x="348" y="196">Forms</text>
+        <!-- UX -->
+        <rect class="sg-bar" x="0" y="224" width="3" height="52" rx="1.5"/>
+        <text class="sg-t" x="14" y="246">UX</text><text class="sg-s" x="14" y="264">体验</text>
+        <rect class="sg-chip" x="116" y="224" width="102" height="52" rx="6"/><text class="sg-m" x="128" y="244">11</text><text class="sg-t" x="128" y="262">Motion</text>
+        <rect class="sg-chip" x="226" y="224" width="102" height="52" rx="6"/><text class="sg-m" x="238" y="244">12</text><text class="sg-t" x="238" y="262">Accessibility</text>
+
+        <!-- token cascade -->
+        <text class="sg-h" x="700" y="12">TOKENS · 3 LAYERS</text>
+        <rect x="700" y="26" width="340" height="62" rx="8" style="fill:var(--surface-2);stroke:var(--line-2)"/>
+        <text class="sg-m" x="716" y="46">LAYER 1 · PRIMITIVE · 原始值</text>
+        <text class="sg-t" x="716" y="70" style="font-family:var(--mono);font-weight:500">color.fawn.400 = #A07E58</text>
+        <path class="sg-arrow" d="M870 90 V110 M865 105 L870 111 L875 105"/>
+        <rect x="700" y="114" width="340" height="62" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+        <text class="sg-m" x="716" y="134">LAYER 2 · SEMANTIC · 语义名</text>
+        <text class="sg-t" x="716" y="158" style="font-family:var(--mono);font-weight:500">accent → fawn.400</text>
+        <path class="sg-arrow" d="M870 178 V198 M865 193 L870 199 L875 193"/>
+        <rect x="700" y="202" width="340" height="62" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.5"/>
+        <text class="sg-m" x="716" y="222">LAYER 3 · COMPONENT · 组件取值</text>
+        <text class="sg-t" x="716" y="246" style="font-family:var(--mono);font-weight:500">button.primary.bg → accent</text>
+      </svg>
+
+      <div class="grid2" style="margin-top:14px">
+        <div class="card accent"><h3>关键认知：一个出发点</h3><p>把人和他要做的事之间的噪音去掉。12 个 tab 的每条规则都是这句话的推论，所以它们读起来像同一个声音。</p></div>
+        <div class="card"><h3>对本项目的意义</h3><p>jiojio 的产品、网站、文档都从这一份取色取字，新协作者不用问人。它也是 jiojio 对外的品牌门面，所以本版的公开化收口和设计内容同样重要。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 名词解释 -->
+  <section class="page" id="p3">
+    <div class="page-inner">
+      <div class="eyebrow">02 · 本版新名词</div>
+      <h2>先把名词说清，再讲变更</h2>
+      <dl class="gloss">
+        <div class="card"><dt>设计系统 <span class="en">design system</span></dt><dd>把品牌的颜色、字体、间距、组件和使用规则写成一份可查的文档。<b>本版：</b>整份文档就是本仓库的内容。</dd></div>
+        <div class="card"><dt>设计令牌 <span class="en">design token</span></dt><dd>给每个设计决定起个名字，改一处，处处跟着变。<b>本版：</b>Tokens tab 能导出 W3C JSON 与 CSS 变量。</dd></div>
+        <div class="card"><dt>Fawn 与 Ink <span class="en">accent rule</span></dt><dd>Fawn <span class="mono">#A07E58</span> 是唯一强调色，表示输出与交互；Ink <span class="mono">#16140F</span> 表示输入与事实。<b>本版：</b>logo 色值对不上它（见决策点）。</dd></div>
+        <div class="card"><dt>Paper 与 Bark <span class="en">canvas colors</span></dt><dd>亮色底 <span class="mono">#FAF8F2</span>、暗色底 <span class="mono">#2D271C</span>，都是暖色，不用纯白纯黑。<b>本版：</b>本页配色就取自它。</dd></div>
+        <div class="card"><dt>字标与印章 <span class="en">wordmark / seal</span></dt><dd>小写 <span class="mono">jio</span> 字标加「吉」字印章，二者都绑 <span class="mono">--accent</span>。<b>本版：</b>MIT 许可明确不覆盖它们。</dd></div>
+        <div class="card"><dt>MIT 许可 <span class="en">MIT License</span></dt><dd>最宽松的开源许可之一：可以复制、修改、再分发，只需保留版权声明。<b>本版：</b>新增，代码与文档适用，品牌资产除外。</dd></div>
+        <div class="card"><dt>历史重写 <span class="en">git filter-repo</span></dt><dd>改写仓库里每一个已有 commit，所有 commit 编号随之改变。<b>本版：</b>用它清除了历史中的个人邮箱与个人账号地址。</dd></div>
+        <div class="card"><dt>noreply 邮箱 <span class="en">GitHub noreply address</span></dt><dd>GitHub 提供的替身邮箱，commit 里写它，真实邮箱就不会公开。<b>本版：</b>全史作者邮箱都改成了它。</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 4 背景 -->
+  <section class="page" id="p4">
+    <div class="page-inner">
+      <div class="eyebrow">03 · 背景</div>
+      <h2>为什么是现在：仓库在 2026-10-05 从私有转为公开</h2>
+      <p class="lede">设计系统 4 月写成后一直在私有仓库里。转公开意味着任何人都能 clone 全部历史和文件，有些东西一旦公开就收不回，所以必须在公开前后一次收口，并给出一个干净的、可对照的版本基线。</p>
+      <div class="grid3" style="margin-top:14px">
+        <div class="card risk"><h3>现状：公开前的问题</h3><ul>
+          <li>2 个早期 commit 的作者邮箱是个人 Gmail</li>
+          <li>旧 README 含指向个人账号的 clone URL</li>
+          <li>7 个页面的页头编号与侧栏不一致</li>
+          <li>logo 规范页有 1 处死链</li>
+          <li>没有 LICENSE；README 是内部口径</li>
+        </ul></div>
+        <div class="card"><h3>影响</h3><p>公开仓库的历史对所有人可读。邮箱写在 commit 里，无法事后撤回；首批访客看到的第一屏是内部口径的 README，第一次点击可能就是 404。</p></div>
+        <div class="card ok"><h3>机会</h3><p>转公开是天然的收口点：一次补齐门面、许可、一致性和隐私，给 v2.0.0 一个干净的基线，后面每个 release 都能对着它说「这一版改了什么」。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 优先级框架 -->
+  <section class="page" id="p5">
+    <div class="page-inner">
+      <div class="eyebrow">04 · 决策框架</div>
+      <h2>先堵不可逆的，再补门面，最后才碰设计</h2>
+      <div class="matrix">
+        <div class="mcol" style="background:var(--ok-soft)"><h3><span class="badge ok">A</span> 公开前必须做</h3><ul>
+          <li>清除历史中的个人邮箱与个人账号地址</li>
+          <li>加 LICENSE，并声明品牌资产保留</li>
+          <li>公开版 README 与截图</li>
+          <li>修页头编号、修死链</li>
+        </ul><div class="note">= 本版内容（F2 到 F6）；F1 是被收口的对象</div></div>
+        <div class="mcol" style="background:var(--warn-soft)"><h3><span class="badge warn">B</span> 需要拍板，下一版候选</h3><ul>
+          <li>向 GitHub support 申请清除旧 SHA 缓存</li>
+          <li>账号开启邮箱隐私，避免 merge commit 再带出邮箱</li>
+          <li>React 换 production 版</li>
+          <li>logo 色值统一</li>
+        </ul><div class="note">= 08 段决策点，等 jiojio 定</div></div>
+        <div class="mcol" style="background:var(--surface-2)"><h3><span class="badge ghost">C</span> 本版不做</h3><ul>
+          <li>改动任何 tab 的设计内容</li>
+          <li>引入构建管线</li>
+          <li>字体与 React 自托管</li>
+        </ul><div class="note">不在收口范围；改设计内容与收口混在一起，后面就无法归因</div></div>
+      </div>
+      <p class="footnote">排序逻辑：不可逆的暴露（邮箱）排第一，因为公开后每过一天多一份副本；门面与一致性是可逆的，排第二；设计本身最后，且单独成版。</p>
+    </div>
+  </section>
+
+  <!-- 6 变更总表 -->
+  <section class="page" id="p6">
+    <div class="page-inner">
+      <div class="eyebrow">05 · 本版变更</div>
+      <h2>6 项变更：空仓库（README 一行）→ v2.0.0</h2>
+      <table class="plain" style="margin-top:12px">
+        <thead><tr><th>#</th><th>变更项</th><th>Before</th><th>After</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">F1</td><td><b>设计系统本体</b></td><td>仓库只有 README 一行</td><td>12 个 tab、4 组；合计 3,928 行</td></tr>
+          <tr><td class="mono">F2</td><td><b>公开版 README</b></td><td>内部口径，无截图</td><td>中英设计语言、11 张截图、tab 索引</td></tr>
+          <tr><td class="mono">F3</td><td><b>页头编号修正</b></td><td>7 页页头与侧栏不一致（例：Components 写 07，侧栏是 08）</td><td>12 页页头与侧栏逐一对应</td></tr>
+          <tr><td class="mono">F4</td><td><b>logo 页死链</b></td><td>返回链接指向不存在的页面</td><td>返回 <code class="mono">index.html#logo</code></td></tr>
+          <tr><td class="mono">F5</td><td><b>MIT 许可</b></td><td>无 LICENSE</td><td>MIT；名称、字标、印章为品牌资产不在内</td></tr>
+          <tr><td class="mono">F6</td><td><b>历史重写</b></td><td>历史含个人邮箱与个人账号 URL</td><td>全史只含 noreply 邮箱与组织地址</td></tr>
+        </tbody>
+      </table>
+      <p class="footnote">质量保障：收口走 PR #1（merge commit 633fe9c，不 squash）；转公开前做过逐文件加全历史的隐私扫描；本发布物的数字全部用 git 命令核对。cross-model 评审 pending，总工程师回填。</p>
+    </div>
+  </section>
+
+  <!-- 7 代表性深挖 -->
+  <section class="page" id="p7">
+    <div class="page-inner">
+      <div class="eyebrow">06 · 代表性详解</div>
+      <h2>影响面最大的一项：F6 历史重写</h2>
+      <div class="ba" style="margin-top:10px">
+        <div class="before"><span class="label">Before</span>2 个早期 commit 的作者邮箱：<code>个人 Gmail</code><br/>旧 README 的 clone URL：<code>github.com/个人账号/…</code></div>
+        <div class="after"><span class="label">After</span>全史作者与提交者邮箱：<code>…@users.noreply.github.com</code><br/>clone URL：<code>github.com/jiojio-lab/jiojio-brand-design</code></div>
+      </div>
+      <div class="qa4">
+        <div class="card"><h3><span class="num">1</span>修了什么</h3><p>用 <code class="mono">git filter-repo --mailmap</code> 把全史的个人邮箱改成 GitHub noreply 地址，用 <code class="mono">--replace-text</code> 把旧 URL 换成组织地址，然后 force push。</p></div>
+        <div class="card"><h3><span class="num">2</span>为什么这样修</h3><p>邮箱写在 commit 对象里，公开后任何人 clone 就能读到，删文件删不掉历史。只有在公开前重写才不会留下已扩散的副本。</p></div>
+        <div class="card risk"><h3><span class="num">3</span>不修会怎样</h3><p>个人邮箱永久留在公开历史，每个 clone 与 fork 都带一份，会被爬虫收集用来发垃圾邮件与社工；个人账号地址让公开仓库与个人身份挂钩。</p></div>
+        <div class="card ok"><h3><span class="num">4</span>delta 在哪</h3><p><b>确定性：</b>历史里不再出现个人邮箱。<b>度量：</b><code class="mono">git log --format='%ae%n%ce' | sort -u</code> 只含 noreply。<b>遗留：</b>旧 SHA 仍可按 URL 访问，等 GitHub support 清除。</p></div>
+      </div>
+      <p class="footnote">其余各项同格式四问详解，见 release 页面（v2.0.0-release.html）。</p>
+    </div>
+  </section>
+
+  <!-- 8 验证时间线 -->
+  <section class="page" id="p8">
+    <div class="page-inner">
+      <div class="eyebrow">07 · 验证方案</div>
+      <h2>怎么确认这一版站得住：验证时间线</h2>
+      <div class="grid3" style="margin-top:14px">
+        <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+0</span> 发布当天</h3><ul>
+          <li>本地起服务，逐个打开 <span class="mono">#brand</span> 到 <span class="mono">#a11y</span> 12 个页面，页头编号与侧栏一致</li>
+          <li><span class="mono">git log --format='%ae%n%ce' | sort -u</span> 只含 noreply</li>
+          <li><span class="mono">grep -rn logo-lab-v6 .</span> 无输出</li>
+          <li>仓库首页识别出 MIT</li>
+        </ul></div>
+        <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+1~2w</span></h3><ul>
+          <li>GitHub support 对旧 SHA 清除申请的回复</li>
+          <li>账号开启邮箱隐私后，新 merge commit 的邮箱是否为 noreply</li>
+          <li>首批外部访问者的反馈内容（不预设数量）</li>
+        </ul></div>
+        <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+1~3m</span></h3><ul>
+          <li>logo 色值定稿后，logo-final.html 与主系统一致</li>
+          <li>React production 版上线后，同网络条件下首屏对比</li>
+        </ul></div>
+      </div>
+      <div class="card" style="margin-top:14px"><h3>归因纪律</h3><p>本版有意不改任何 tab 的设计内容。以后看到视觉或行为上的变化，可以确定来自后续 release，而不是这次收口。</p></div>
+    </div>
+  </section>
+
+  <!-- 9 决策点 + 下一版 + 追溯 -->
+  <section class="page" id="p9">
+    <div class="page-inner">
+      <div class="eyebrow">08 · Next</div>
+      <h2>需要的决策，以及下一版预告</h2>
+      <div class="grid2" style="margin-top:14px">
+        <div class="card warn"><h3>需要 jiojio 拍板</h3><ul>
+          <li>向 GitHub support 申请清除旧 SHA 缓存（只有账号所有者能提交）</li>
+          <li>开启账号「Keep my email addresses private」</li>
+          <li>React development 版换 production 版</li>
+          <li>logo 色值以哪个为准：<span class="mono">#7A5E3E</span>（logo-final.html）还是 <span class="mono">#A07E58</span>（主系统）</li>
+        </ul></div>
+        <div class="card"><h3>下一版候选（未承诺）</h3><ul>
+          <li>上述后两项落地：production React、logo 色值统一</li>
+          <li>字体与 React 自托管，让设计系统可离线打开</li>
+          <li>README 截图的再生路径</li>
+        </ul></div>
+      </div>
+      <div class="card accent" style="margin-top:14px"><h3>一句话总结</h3><p style="font-size:14px">v2.0.0 是 jiojio 设计系统的<b>首个公开版本</b>：12 个 tab 的本体原样入库，收口补齐了<b>公开 README、页头编号、死链、MIT 许可</b>，并在公开前<b>重写历史清除了个人邮箱</b>；还有两件只有 jiojio 能做的事（清缓存、开邮箱隐私）待办。</p></div>
+      <p class="footnote mono">追溯：github.com/jiojio-lab/jiojio-brand-design · 152069e..633fe9c · PR #1 · docs/releases/v2.0.0-release.html · CHANGELOG.md</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var snap = document.getElementById('snap');
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var dots = document.getElementById('dots');
+  var now = document.getElementById('pageNow');
+  document.getElementById('pageTotal').textContent = pages.length;
+  pages.forEach(function (p, i) {
+    var a = document.createElement('a');
+    a.href = '#' + p.id;
+    a.setAttribute('aria-label', 'page ' + (i + 1));
+    a.addEventListener('click', function (e) { e.preventDefault(); pages[i].scrollIntoView(); });
+    dots.appendChild(a);
+  });
+  var links = Array.prototype.slice.call(dots.children);
+  function sync() {
+    var idx = Math.round(snap.scrollTop / window.innerHeight);
+    idx = Math.max(0, Math.min(pages.length - 1, idx));
+    links.forEach(function (l, i) { l.classList.toggle('on', i === idx); });
+    now.textContent = idx + 1;
+  }
+  snap.addEventListener('scroll', function () { requestAnimationFrame(sync); });
+  window.addEventListener('keydown', function (e) {
+    var idx = Math.round(snap.scrollTop / window.innerHeight);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault(); pages[Math.min(idx + 1, pages.length - 1)].scrollIntoView();
+    }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault(); pages[Math.max(idx - 1, 0)].scrollIntoView();
+    }
+    if (e.key === 'Home') { pages[0].scrollIntoView(); }
+    if (e.key === 'End') { pages[pages.length - 1].scrollIntoView(); }
+  });
+  function goHash() {
+    var el = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    if (el && el.classList.contains('page')) {
+      snap.style.scrollBehavior = 'auto'; el.scrollIntoView(); snap.style.scrollBehavior = ''; sync();
+    }
+  }
+  window.addEventListener('hashchange', goHash);
+  goHash();
+  sync();
+})();
+</script>
+</body>
+</html>

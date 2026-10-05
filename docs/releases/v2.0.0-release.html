@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Release v2.0.0 · Release Page · jiojio Brand Design</title>
+<style>
+:root {
+  --bg: #FAF8F2; --surface: #FFFFFF; --surface-2: #F3F1E9; --surface-3: #EDEAE0;
+  --ink-1: #16140F; --ink-2: #6B675C; --ink-3: #9B978B; --ink-4: #C2BFB2;
+  --line: #E0DDD1; --line-2: #C2BFB2;
+  --accent: #A07E58; --accent-soft: #E6DACB; --accent-ink: #5A442C;
+  --ok: #788C5D; --ok-soft: #E8EDDF; --warn: #C7923E; --warn-soft: #FDF3E3;
+  --risk: #C4453C; --risk-soft: #FCEEED;
+  /* text-on-soft variants: derived from the semantic hues, for 11-12px labels that must stay readable */
+  --ok-ink: #4A5A36; --warn-ink: #7A5514; --risk-ink: #8F2D26;
+  --r-sm: 6px; --r-md: 8px; --ease: cubic-bezier(.2,.7,.2,1);
+  --sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  --mono: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+b, strong { font-weight: 600; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink-1);
+  font-family: var(--sans); font-size: 14px; line-height: 1.6; }
+.mono { font-family: var(--mono); font-feature-settings: 'tnum'; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 80px; }
+
+.topbar { position: sticky; top: 0; z-index: 10; height: 44px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+  border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.94); }
+.crumb { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
+.brand-tile { width: 22px; height: 22px; border-radius: var(--r-sm); background: var(--accent);
+  color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+.crumb b { color: var(--ink-1); font-weight: 600; }
+.crumb .sep { color: var(--ink-4); }
+.ver-badge { font-family: var(--mono); font-size: 10.5px; color: var(--accent-ink);
+  background: var(--accent-soft); border-radius: 99px; padding: 2px 9px; font-weight: 500; }
+.topbar .meta { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+
+.hero { padding: 48px 0 8px; }
+h1 { margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; }
+p.lede { color: var(--ink-2); font-size: 14.5px; line-height: 1.7; margin: 12px 0 0; }
+.statusline { display: inline-flex; margin-top: 16px; font-size: 12px; font-weight: 500;
+  background: var(--warn-soft); color: var(--warn-ink); padding: 6px 12px; border-radius: var(--r-sm); }
+
+section.seg { margin-top: 44px; }
+.seg-head { display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line-2); padding-bottom: 8px; margin-bottom: 16px; }
+.seg-head .no { font-family: var(--mono); font-size: 13px; color: var(--accent-ink); font-weight: 600; }
+.seg-head h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+h3 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+.sub { color: var(--ink-2); font-size: 12.5px; line-height: 1.6; }
+
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 99px; vertical-align: middle; }
+.badge.accent { background: var(--accent-soft); color: var(--accent-ink); }
+.badge.ok { background: var(--ok-soft); color: var(--ok-ink); }
+.badge.warn { background: var(--warn-soft); color: var(--warn-ink); }
+.badge.risk { background: var(--risk-soft); color: var(--risk-ink); }
+.badge.ghost { background: var(--surface-3); color: var(--ink-2); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 16px; background: var(--surface); }
+.card.soft { background: var(--surface-2); border-color: transparent; }
+.card.accent { background: var(--accent-soft); border-color: transparent; }
+.card.ok { background: var(--ok-soft); border-color: transparent; }
+.card.warn { background: var(--warn-soft); border-color: transparent; }
+.card.risk { background: var(--risk-soft); border-color: transparent; }
+.card p, .card li { font-size: 12.5px; line-height: 1.65; color: var(--ink-2); margin: 0; }
+.card ul { margin: 6px 0 0; padding-left: 17px; }
+.card li { margin-bottom: 4px; }
+
+table.plain { width: 100%; border-collapse: collapse; font-size: 12.5px; background: var(--surface); }
+table.plain th { text-align: left; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-2); font-weight: 500; padding: 7px 10px;
+  border-bottom: 1px solid var(--line-2); background: var(--surface-3); white-space: nowrap; }
+table.plain td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.55; color: var(--ink-2); }
+table.plain td b { color: var(--ink-1); }
+table.plain tr:last-child td { border-bottom: none; }
+code, .codechip { font-family: var(--mono); font-size: 0.92em; }
+.codechip { background: var(--surface-3); border-radius: 4px; padding: 1px 6px; font-size: 11.5px; white-space: nowrap; }
+
+.gloss { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gloss dt { font-size: 13px; font-weight: 600; margin-bottom: 3px; display: flex; align-items: baseline; gap: 8px; }
+.gloss dt .en { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); font-weight: 400; }
+.gloss dd { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+
+.fix { border: 1px solid var(--line); border-radius: var(--r-md); margin-bottom: 14px; overflow: hidden; background: var(--surface); }
+.fix-head { display: flex; align-items: center; gap: 10px; padding: 11px 16px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.fix-head .fno { font-family: var(--mono); font-size: 11px; color: var(--accent-ink); font-weight: 600; }
+.fix-head b { font-size: 13.5px; }
+.fix-head .loc { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: auto; }
+.fix-body { display: grid; grid-template-columns: 1fr 1fr; }
+.fix-body > div { padding: 11px 16px; font-size: 12.5px; line-height: 1.65; color: var(--ink-2); border-bottom: 1px solid var(--line); }
+.fix-body > div:nth-child(odd) { border-right: 1px solid var(--line); }
+.fix-body > div:nth-last-child(-n+2) { border-bottom: none; }
+.fix-body .q { display: block; font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
+.fix-body .bleed .q { color: var(--risk-ink); }
+.fix-body .delta .q { color: var(--ok-ink); }
+.footnote { margin-top: 12px; font-size: 11px; color: var(--ink-2); }
+
+.card span.mono, .card code, .fix-body span.mono, .fix-body code { white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .grid2, .grid3, .gloss, .fix-body { grid-template-columns: 1fr; }
+  .fix-body > div:nth-child(odd) { border-right: none; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="crumb">
+    <span class="brand-tile">吉</span>
+    <b>jiojio Brand Design</b><span class="sep">›</span><span>Releases</span><span class="sep">›</span><b>v2.0.0</b>
+    <span class="ver-badge">Release Page</span>
+  </div>
+  <div class="meta">jiojio-lab/jiojio-brand-design · 2026-10</div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Release <span class="mono" style="color:var(--accent)">v2.0.0</span> — 首个公开版本</h1>
+    <p class="lede">这是仓库的第一个 release，没有上一个 tag。本版把 4 月写成的设计系统（12 个 tab、单页交互 HTML）与 10 月 5 日转为 public 时做的一整轮收口放在一起交代：公开版 README、页头编号修正、死链修正、MIT 许可，以及一次为清除个人邮箱而做的全史重写。宏观简报见 <span class="mono">v2.0.0-brief-slide.html</span>。</p>
+    <div class="statusline">状态：已合并待发布（tag 与源码 zip 校验值待回填）</div>
+  </div>
+
+  <!-- 九段结构:01 元数据 / 02 一句话 diff / 03 名词解释 / 04 变更总表 / 05 逐项详解 / 06 质量评审 / 07 验证时间线 / 08 决策点 / 09 下一版与追溯 -->
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">01</span><h2>版本元数据</h2></div>
+    <table class="plain"><tbody>
+      <tr><td style="width:130px"><b>版本号</b></td><td class="mono">v2.0.0（系统自标 <span class="codechip">2.0.0 · Fawn</span>，侧栏 footer 与 <span class="codechip">src/app.jsx</span> 一致）</td></tr>
+      <tr><td><b>类型</b></td><td>首发 release：设计系统本体 + 公开化收口（文档 / 许可 / 一致性 / 隐私）。无构建、无部署对象</td></tr>
+      <tr><td><b>对比基线</b></td><td class="mono">无 baseline tag；基线 = Initial commit 152069e（2026-04-26，README 仅一行）</td></tr>
+      <tr><td><b>代码</b></td><td class="mono">
+        2d50f27（2026-04-27，直接入 main）：17 files, +4034 −1<br/>
+        PR #1 readme-public → main；merge 633fe9c（不 squash）：21 files, +206 −76<br/>
+        全版本 152069e..633fe9c：29 files, +4164 −1
+      </td></tr>
+      <tr><td><b>风险级别</b></td><td><span class="badge ok">低</span> 纯静态文档仓库，无服务、无数据库。唯一不可逆动作是历史重写（F6），已在转 public 当天完成，影响面见 05 段</td></tr>
+      <tr><td><b>评审</b></td><td>cross-model 评审：<span class="badge warn">pending</span> 总工程师回填。回填前不得视为通过</td></tr>
+      <tr><td><b>回滚</b></td><td>静态文档仓库，无部署；回滚 = checkout 上一 tag 或 <span class="codechip">git revert</span>。本版是首个 tag，没有「上一 tag」可回，回滚只能靠 revert</td></tr>
+      <tr><td><b>发布物</b></td><td class="mono">v2.0.0-release.html<br/>v2.0.0-brief-slide.html<br/>v2.0.0-release-notes.md<br/>源码 zip：<span style="color:var(--ink-3)">SHA-256 待回填</span><br/>tag SHA：<span style="color:var(--ink-3)">待回填</span></td></tr>
+    </tbody></table>
+    <p class="footnote">本页提到的所有 commit SHA 都是历史重写之后的 SHA；重写之前的旧 SHA 不在本页范围。tag 预期落在发布时的 main（目前 633fe9c），由总工程师打 tag 时确认。发布物 PR 追加的 <span class="mono">docs/releases/</span>、<span class="mono">CHANGELOG.md</span>、README 「一图看懂」不在 633fe9c 之内。</p>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">02</span><h2>一句话 diff：空仓库（README 一行）→ v2.0.0</h2></div>
+    <div class="grid2">
+      <div class="card"><ul>
+        <li><b>设计系统：</b>仓库里只有一行标题 → 12 个 tab、4 组的单页交互文档（<span class="mono">index.html</span> + <span class="mono">logo-final.html</span> + <span class="mono">src/</span> 下 14 个 jsx，合计 3,928 行）</li>
+        <li><b>文档：</b>内部口径 README（含 git init / push 维护步骤）→ 面向公开读者的中英 README（设计语言摘要、11 张截图、tab 索引、文件地图）</li>
+      </ul></div>
+      <div class="card"><ul>
+        <li><b>一致性：</b>7 个页面（06 到 12）页头编号与侧栏不一致、logo 规范页有死链 → 全部对齐</li>
+        <li><b>许可与隐私：</b>无 LICENSE、历史里有个人邮箱与个人账号 URL → MIT（品牌资产保留）+ 全史改写为 noreply 邮箱与组织地址</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">03</span><h2>名词解释</h2></div>
+    <dl class="gloss">
+      <div class="card"><dt>设计系统 <span class="en">design system</span></dt><dd>把品牌的颜色、字体、间距、组件和使用规则写成一份可查、可复用的文档，团队照着做就不会各画各的。本仓库就是 jiojio 的这份文档。</dd></div>
+      <div class="card"><dt>设计令牌 <span class="en">design token</span></dt><dd>给每个设计决定起一个名字（例如 <span class="mono">--accent</span> 表示强调色）。改一处，所有用到它的地方一起变。</dd></div>
+      <div class="card"><dt>三层级联 <span class="en">primitive → semantic → component</span></dt><dd>原始值（<span class="mono">fawn.400 = #A07E58</span>）→ 语义名（<span class="mono">accent</span>）→ 组件取值（<span class="mono">button.primary.bg</span>）。组件只能取阶梯上的值，不自造中间色。</dd></div>
+      <div class="card"><dt>W3C DTCG <span class="en">Design Tokens Community Group</span></dt><dd>W3C 社区组定的令牌交换格式。Tokens tab 可把整套令牌导出成这种 JSON，或导出成普通 CSS 变量。</dd></div>
+      <div class="card"><dt>Paper / Bark <span class="en">canvas colors</span></dt><dd>亮色底 Paper <span class="mono">#FAF8F2</span>（暖米色）与暗色底 Bark <span class="mono">#2D271C</span>（暖棕黑）。系统从不使用纯白或纯黑做底。</dd></div>
+      <div class="card"><dt>Fawn 与 Ink <span class="en">accent rule</span></dt><dd>Fawn <span class="mono">#A07E58</span> 是唯一强调色，规则是「Fawn = 输出 / 交互」；Ink <span class="mono">#16140F</span> 表示「输入 / 事实」。</dd></div>
+      <div class="card"><dt>字标与印章 <span class="en">wordmark / seal</span></dt><dd>logo 由小写 <span class="mono">jio</span> 字标（EB Garamond 500）与圆角方块上的「吉」印章组成，颜色都绑在 <span class="mono">--accent</span> 上。</dd></div>
+      <div class="card"><dt>六条禁令 <span class="en">non-negotiables</span></dt><dd>无 emoji、无感叹号、logo 与排版无渐变、投影模糊不超过 16px、单界面不超过 3 种字重、永不禁用按钮。</dd></div>
+      <div class="card"><dt>Babel Standalone <span class="en">in-browser JSX</span></dt><dd>让浏览器直接编译 JSX，所以仓库没有构建步骤，但首次打开需要联网从 unpkg 加载 React 与 Babel。</dd></div>
+      <div class="card"><dt>历史重写 <span class="en">git filter-repo</span></dt><dd>改写仓库里已有的每一个 commit（这里是作者邮箱与文件里的 URL）。所有 commit SHA 因此改变，需要 force push。</dd></div>
+    </dl>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">04</span><h2>变更总表</h2></div>
+    <table class="plain">
+      <thead><tr><th>#</th><th style="width:150px">变更项</th><th>位置</th><th>Before</th><th>After</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">F1</td><td><b>设计系统本体（12 tab）</b></td><td class="mono">index.html<br/>logo-final.html<br/>src/*.jsx (14)</td><td>仓库只有 README 一行</td><td>Brand 2 + Foundations 5 + UI 3 + UX 2 = 12 个 tab；侧栏、亮暗主题、24 色强调色挑选器</td></tr>
+        <tr><td class="mono">F2</td><td><b>公开版 README</b></td><td class="mono">README.md<br/>docs/screenshots/ (11)</td><td>内部口径，含 git init / push 步骤，无截图</td><td>中英设计语言、11 张截图、tab 索引、品牌基础值、文件地图</td></tr>
+        <tr><td class="mono">F3</td><td><b>页头编号与分组修正</b></td><td class="mono">src/{layout,icon,components,<br/>states,forms,motion,a11y}.jsx</td><td>例：Components 页头 <span class="mono">07 · UI</span>，侧栏是 08</td><td>7 个页头与侧栏的编号和分组逐一对应</td></tr>
+        <tr><td class="mono">F4</td><td><b>logo 规范页死链</b></td><td class="mono">logo-final.html</td><td><span class="mono">← back to lab</span> 指向不存在的 <span class="mono">logo-lab-v6.html</span></td><td><span class="mono">← back to design system</span> 指向 <span class="mono">index.html#logo</span></td></tr>
+        <tr><td class="mono">F5</td><td><b>MIT 许可</b></td><td class="mono">LICENSE （21 行）<br/>README.md License 节</td><td>无许可文件</td><td>代码与文档 MIT；jiojio 名称 / jio 字标 / 吉 印章为品牌资产，不在许可内</td></tr>
+        <tr><td class="mono">F6</td><td><b>历史重写（隐私）</b></td><td class="mono">全部 commit（非文件）</td><td>2 个早期 commit 的作者邮箱是个人 Gmail；旧 README 含个人账号 clone URL</td><td>邮箱全史改为 GitHub noreply；URL 全史替换为组织地址；force push</td></tr>
+      </tbody>
+    </table>
+    <p class="footnote">本版有意不做：不改任何 tab 的设计内容（F1 是 4 月原样入库）；不引入构建管线；不把 unpkg 与 Google Fonts 改为自托管（见 08 段决策点）；不替换 React development 版；不统一 logo-final.html 与主系统的 logo 色值（待 jiojio 定稿，不在收口范围内擅自选一边）。</p>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">05</span><h2>逐项详解（四问）</h2></div>
+
+    <div class="fix">
+      <div class="fix-head"><span class="fno">F1</span><b>设计系统本体：12 个 tab</b><span class="loc">index.html · logo-final.html · src/</span></div>
+      <div class="fix-body">
+        <div><span class="q">修了什么</span>入库设计系统本体。<span class="mono">index.html</span> 放 :root 与暗色令牌，<span class="mono">src/app.jsx</span> 的 TABS 定义 4 组 12 个 tab（Brand 01 到 02、Foundations 03 到 07、UI 08 到 10、UX 11 到 12），每个 tab 一个 jsx；<span class="mono">logo-final.html</span> 是独立的 logo 规范页。</div>
+        <div><span class="q">为什么这样修</span>单页交互 HTML + 浏览器内编译 JSX，没有 npm、没有构建，clone 下来 <span class="mono">python3 -m http.server</span> 即用。代价是首次加载依赖 unpkg 与 Google Fonts。</div>
+        <div class="bleed"><span class="q">不修会怎样</span>品牌规则只存在于设计者脑中与零散文件里。新协作者想知道「强调色什么时候能用」「按钮能不能置灰」只能去问人；各人自取颜色与字号，品牌在几个月内就会漂移。</div>
+        <div class="delta"><span class="q">delta</span>确定性：12 个 tab 可经 <span class="mono">index.html#brand</span> 到 <span class="mono">#a11y</span> 直达。度量：本地起服务后逐个打开 12 个 hash，每页都能渲染且侧栏高亮对应项；设计系统本体合计 3,928 行（<span class="mono">wc -l</span>）。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fix-head"><span class="fno">F2</span><b>公开版 README</b><span class="loc">README.md · docs/screenshots/</span></div>
+      <div class="fix-body">
+        <div><span class="q">修了什么</span>README 从「Internal brand guideline」口径重写为面向公开读者：中英并排的设计语言摘要（Paper 与 Bark、一个强调色一条规则、三副字体、令牌、六条禁令）、11 张截图、12 个 tab 索引、品牌基础值表、文件地图。随后补了中文摘要独立成段、License 节。</div>
+        <div><span class="q">为什么这样修</span>转 public 之后 README 就是门面。设计语言用一页文字加截图讲清，比让访客自己点开 12 个 tab 更快；截图放 <span class="mono">docs/screenshots/</span>，README 用相对路径引用。</div>
+        <div class="bleed"><span class="q">不修会怎样</span>公开仓库首页是一份写着 Internal 的内部说明，里面还有 <span class="mono">git init / git push</span> 的维护步骤。访客在首屏看不出这是什么、好不好看，也看不到任何一张画面，大概率直接关掉。</div>
+        <div class="delta"><span class="q">delta</span>确定性：README 首屏出现标题、定位、Quick start；截图 11 张（<span class="mono">ls docs/screenshots | wc -l</span>）。度量：发布后抽一个没见过本项目的人，看他只读首屏能否说出「这是 jiojio 的品牌与设计系统」。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fix-head"><span class="fno">F3</span><b>页头编号与分组修正（7 页）</b><span class="loc">src/{layout,icon,components,states,forms,motion,a11y}.jsx</span></div>
+      <div class="fix-body">
+        <div><span class="q">修了什么</span>7 个页面的 <span class="mono">kicker</span> 改成与侧栏一致：<br/>
+          Layout <span class="mono">05 · UI → 06 · Foundations</span><br/>
+          Icons <span class="mono">06 · UI → 07 · Foundations</span><br/>
+          Components <span class="mono">07 → 08</span> · States <span class="mono">08 → 09</span> · Forms <span class="mono">09 → 10</span><br/>
+          Motion <span class="mono">10 · Motion → 11 · UX</span><br/>
+          Accessibility <span class="mono">11 → 12</span></div>
+        <div><span class="q">为什么这样修</span>以 <span class="mono">src/app.jsx</span> 的 TABS（编号与分组的唯一来源）为准，只改 kicker 一行，不动页面内容，也不重排侧栏。</div>
+        <div class="bleed"><span class="q">不修会怎样</span>用户在页头读到「Components · 07 · UI」，回侧栏找 07 看到的是 Icons；按页头编号向别人转述或检索时，会指到错的 tab。Icons 与 Layout 的分组还被写成 UI，而侧栏把它们放在 Foundations。</div>
+        <div class="delta"><span class="q">delta</span>确定性：12 个页头 kicker 与 TABS 的 num 和 group 一一对应（01 到 05 本来就对）。度量：<span class="mono">grep -n 'kicker=' src/*.jsx</span> 与 TABS 逐行对照。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fix-head"><span class="fno">F4</span><b>logo 规范页死链</b><span class="loc">logo-final.html</span></div>
+      <div class="fix-body">
+        <div><span class="q">修了什么</span>页首的返回链接从 <span class="mono">logo-lab-v6.html</span>（仓库里不存在）改为 <span class="mono">index.html#logo</span>，文案从「back to lab」改为「back to design system」。</div>
+        <div><span class="q">为什么这样修</span>规范页是定稿后对外展示的页面，返回目标应当是主系统的 Logo tab，而不是已经不存在的实验页。</div>
+        <div class="bleed"><span class="q">不修会怎样</span>访客在 logo 规范页点左上角返回，得到一个 404（GitHub 上是 Not Found，本地服务是 File not found），而且从这页没有别的路回到主系统。</div>
+        <div class="delta"><span class="q">delta</span>确定性：仓库内不再引用 <span class="mono">logo-lab-v6.html</span>。度量：<span class="mono">grep -rn logo-lab-v6 .</span> 无输出；点击返回落在 Logo tab。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fix-head"><span class="fno">F5</span><b>MIT 许可，品牌资产保留</b><span class="loc">LICENSE · README.md</span></div>
+      <div class="fix-body">
+        <div><span class="q">修了什么</span>新增 <span class="mono">LICENSE</span>（MIT，21 行）；README 增加 License 节，明确写出 jiojio 名称、<span class="mono">jio</span> 字标、「吉」印章是品牌资产，不在许可范围内。</div>
+        <div><span class="q">为什么这样修</span>设计系统希望被参考与复用，所以代码与文档用最宽松的 MIT；但品牌标识不能因此被别人当成自己的 logo，所以单独声明保留。</div>
+        <div class="bleed"><span class="q">不修会怎样</span>公开仓库没有 LICENSE 时，法律默认是「保留所有权利」：别人想复制、修改、再分发都没有授权依据，想参考的人会绕开。反过来，只放 MIT 而不声明保留，字标与印章在字面上也被一并授权了。</div>
+        <div class="delta"><span class="q">delta</span>确定性：GitHub 仓库侧栏识别出 MIT；README 有品牌资产保留声明。度量：发布后看仓库首页 License 徽标，以及 <span class="mono">grep -n 品牌资产 README.md</span>。</div>
+      </div>
+    </div>
+
+    <div class="fix">
+      <div class="fix-head"><span class="fno">F6</span><b>历史重写：清除个人邮箱与个人账号 URL</b><span class="loc">全部 commit · force push</span></div>
+      <div class="fix-body">
+        <div><span class="q">修了什么</span>转 public 前做了逐文件加全历史的扫描：没有密钥、本机路径、真人信息，但发现两处。一是两个早期 commit 的作者邮箱是个人 Gmail，用 <span class="mono">git filter-repo --mailmap</span> 全史改为 GitHub noreply 地址；二是旧 README 里指向个人账号的 clone URL，用 <span class="mono">--replace-text</span> 在历史中替换为组织地址。随后 force push。</div>
+        <div><span class="q">为什么这样修</span>邮箱写在 commit 对象里，仓库一公开，任何人 clone 后 <span class="mono">git log</span> 即可读到，公开后再删文件也删不掉历史。唯一办法是在公开前重写。</div>
+        <div class="bleed"><span class="q">不修会怎样</span>个人邮箱永久留在公开历史里，每个 fork 与 clone 都带一份副本，会被爬虫收集用于垃圾邮件与社工；个人账号 URL 让公开仓库与个人身份可关联。公开之后再清，已经散出去的副本收不回。</div>
+        <div class="delta"><span class="q">delta</span>确定性：历史里的作者与提交者邮箱只剩 noreply 地址。度量：<span class="mono">git log --format='%ae%n%ce' | sort -u</span> 只含 noreply 域名。<b>遗留两项（见 08 段）：</b>重写前的旧 SHA 仍可经 GitHub 按 URL 直接访问，需向 GitHub support 申请清除；账号未开启邮箱隐私，GitHub 服务端生成的 merge commit 会再次带出邮箱（已发生一次并已重写修掉）。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">06</span><h2>质量与评审</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>流程</h3><p>设计系统本体直接入 main（2d50f27）；收口工作走分支 <span class="mono">readme-public</span> 与 PR #1，以 merge commit 633fe9c 合入，不 squash，保留 3 个 commit 的完整历史。转 public 前做过一次逐文件加全历史的隐私扫描（结论：无密钥、路径、真人信息，发现的两项见 F6）。本发布物在分支 <span class="mono">release/v2.0.0</span> 上写成，页内数字逐一用 <span class="mono">git log</span> / <span class="mono">git diff --stat</span> / <span class="mono">wc -l</span> 核对，页面用无头 Chrome 截图查验。</p></div>
+      <div class="card"><h3>评审结论</h3><p>cross-model 评审：<span class="badge warn">pending</span> 总工程师回填。回填内容包括评审席位、verdict、原文落盘路径与修订落地情况。<br/><br/>评审范围说明：本版的评审对象是发布物与隐私处置；F1 设计系统的设计内容本身（4 月原样入库）不在本次评审范围内。</p></div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">07</span><h2>验证时间线（不预支数字）</h2></div>
+    <div class="grid3">
+      <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+0</span> 发布当天</h3><ul>
+        <li>clone 后起本地服务，逐个打开 <span class="mono">#brand</span> 到 <span class="mono">#a11y</span> 共 12 个 hash，页头 kicker 与侧栏编号一致</li>
+        <li><span class="mono">git log --format='%ae%n%ce' | sort -u</span> 只含 noreply</li>
+        <li><span class="mono">grep -rn logo-lab-v6 .</span> 无输出</li>
+        <li>GitHub 仓库首页识别出 MIT</li>
+      </ul></div>
+      <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+1~2w</span></h3><ul>
+        <li>GitHub support 对旧 SHA 清除申请的回复与结果</li>
+        <li>账号开启邮箱隐私后，新产生的 merge commit 邮箱是否为 noreply</li>
+        <li>首批外部访问者的 issue / 反馈内容（不预设数量）</li>
+      </ul></div>
+      <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+1~3m</span></h3><ul>
+        <li>logo 色值定稿后，logo-final.html 与主系统 Logo tab 是否一致</li>
+        <li>React 换 production 版后首屏体验对比（同一网络条件下）</li>
+        <li>设计系统在 jiojio 自己的产品中被引用的次数（由 jiojio 自述，不在仓库内统计）</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">08</span><h2>决策点</h2></div>
+    <div class="card warn"><ul>
+      <li><b>向 GitHub support 申请清除旧 SHA 缓存：</b>重写前的 commit SHA 仍能按 URL 访问，里面是旧邮箱与旧 URL。只有 jiojio 能以账号所有者身份提交申请。</li>
+      <li><b>开启账号设置「Keep my email addresses private」：</b>不开则 GitHub 服务端生成的 merge commit 会再次写入个人邮箱，每次都要再重写一次历史。</li>
+      <li><b>React development 版换 production 版：</b><span class="mono">index.html</span> 目前加载 <span class="mono">react.development.js</span>，体积大且带开发警告。换版需要同步更换 SRI 哈希，属于 index.html 的功能性改动，留给下一版。</li>
+      <li><b>logo-final.html 与主系统 logo 色值不一致：</b>logo-final.html 写默认 <span class="mono">--accent = #7A5E3E</span>（Fawn Deep），主系统 <span class="mono">--accent = #A07E58</span>（Fawn）且 Logo tab 说明 logo 取该 token。需要 jiojio 定稿以哪个为准，再统一一边。</li>
+    </ul></div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">09</span><h2>下一版与追溯</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>下一版候选（未承诺）</h3><ul>
+        <li>决策点 3、4 落地：React production 版 + SRI 更新；logo 色值统一</li>
+        <li>字体与 React 自托管，让设计系统可离线打开（现在首次加载需联网）</li>
+        <li>README 截图的再生路径：现有 11 张截图没有脚本，改版时需要重拍</li>
+      </ul></div>
+      <div class="card"><h3>追溯</h3><ul class="mono" style="font-size:11.5px">
+        <li>repo: github.com/jiojio-lab/jiojio-brand-design</li>
+        <li>152069e  2026-04-26  Initial commit</li>
+        <li>2d50f27  2026-04-27  Update brand design files</li>
+        <li>0cd12f9  2026-10-05  public-facing README</li>
+        <li>7235ea2  2026-10-05  中文摘要独立成段</li>
+        <li>a729106  2026-10-05  add MIT license</li>
+        <li>633fe9c  2026-10-05  Merge pull request #1</li>
+        <li>docs/releases/README.md  版本索引</li>
+        <li>CHANGELOG.md  Keep a Changelog</li>
+      </ul></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
