@@ -33,7 +33,7 @@ const LayoutTab = () => {
   return (
     <div className="page">
       <PageHeader
-        kicker="05 · UI"
+        kicker="06 · Foundations"
         titleEn="Spacing, Radius, Shadow & Grid"
         titleZh="空间、圆角、阴影、栅格"
         lede="The rhythm of the product. A 4-pixel base, four radii, three elevations, four breakpoints. Fewer choices make stronger designs."

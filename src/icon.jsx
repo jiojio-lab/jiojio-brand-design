@@ -15,7 +15,7 @@ const IconTab = () => {
   return (
     <div className="page">
       <PageHeader
-        kicker="06 · UI"
+        kicker="07 · Foundations"
         titleEn="Iconography"
         titleZh="图标系统"
         lede="One stroke width. One palette. No emoji, ever. Icons are punctuation — the sentence must read without them first."

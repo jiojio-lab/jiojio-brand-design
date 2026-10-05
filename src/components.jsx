@@ -204,7 +204,7 @@ const ComponentsTab = () => {
   return (
     <div className="page">
       <PageHeader
-        kicker="07 · UI"
+        kicker="08 · UI"
         titleEn="Components"
         titleZh="组件库"
         lede="The working vocabulary of the product. Every component here is live — hover, click, type. What you see is what ships."
