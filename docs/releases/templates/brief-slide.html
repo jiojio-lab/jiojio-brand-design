@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Release vX.Y.Z · Brief Slide · jiojio Brand Design</title>
+<style>
+:root {
+  --bg: #FAF8F2; --surface: #FFFFFF; --surface-2: #F3F1E9; --surface-3: #EDEAE0;
+  --ink-1: #16140F; --ink-2: #6B675C; --ink-3: #9B978B; --ink-4: #C2BFB2;
+  --line: #E0DDD1; --line-2: #C2BFB2;
+  --accent: #A07E58; --accent-soft: #E6DACB; --accent-ink: #5A442C;
+  --ok: #788C5D; --ok-soft: #E8EDDF; --warn: #C7923E; --warn-soft: #FDF3E3;
+  --risk: #C4453C; --risk-soft: #FCEEED;
+  /* text-on-soft variants: derived from the semantic hues, for 11-12px labels that must stay readable */
+  --ok-ink: #4A5A36; --warn-ink: #7A5514; --risk-ink: #8F2D26;
+  --r-sm: 6px; --r-md: 8px; --ease: cubic-bezier(.2,.7,.2,1);
+  --sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  --mono: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+b, strong { font-weight: 600; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink-1);
+  font-family: var(--sans); font-size: 14px; line-height: 1.55; }
+.mono { font-family: var(--mono); font-feature-settings: 'tnum'; }
+
+.topbar { position: fixed; top: 0; left: 0; right: 0; height: 44px; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+  border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.92); }
+.crumb { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
+.brand-tile { width: 22px; height: 22px; border-radius: var(--r-sm); background: var(--accent);
+  color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+.crumb b { color: var(--ink-1); font-weight: 600; }
+.crumb .sep { color: var(--ink-4); }
+.ver-badge { font-family: var(--mono); font-size: 10.5px; color: var(--accent-ink);
+  background: var(--accent-soft); border-radius: 99px; padding: 2px 9px; font-weight: 500; }
+.topbar .meta { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+
+.snap { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+.page { min-height: 100vh; scroll-snap-align: start; scroll-snap-stop: always;
+  padding: 76px 8vw 56px; display: flex; flex-direction: column; justify-content: center; }
+.page-inner { max-width: 1060px; width: 100%; margin: 0 auto; }
+
+.dots { position: fixed; right: 14px; top: 50%; transform: translateY(-50%); z-index: 10;
+  display: flex; flex-direction: column; gap: 8px; }
+.dots a { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); display: block; transition: background 140ms var(--ease), transform 140ms var(--ease); }
+.dots a.on { background: var(--accent); transform: scale(1.35); }
+.pagenum { position: fixed; bottom: 14px; right: 18px; z-index: 10;
+  font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+.eyebrow { font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-2); margin-bottom: 12px; }
+h1 { margin: 0; font-size: clamp(30px, 4.4vw, 50px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; }
+h2 { margin: 0 0 6px; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; letter-spacing: -0.02em; }
+h3 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+p.lede { color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 800px; margin: 14px 0 0; }
+.sub { color: var(--ink-2); font-size: 13px; line-height: 1.6; }
+
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 99px; vertical-align: middle; }
+.badge.accent { background: var(--accent-soft); color: var(--accent-ink); }
+.badge.ok { background: var(--ok-soft); color: var(--ok-ink); }
+.badge.warn { background: var(--warn-soft); color: var(--warn-ink); }
+.badge.risk { background: var(--risk-soft); color: var(--risk-ink); }
+.badge.ghost { background: var(--surface-3); color: var(--ink-2); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: var(--r-md); padding: 15px 17px; background: var(--surface); }
+.card.soft { background: var(--surface-2); border-color: transparent; }
+.card.accent { background: var(--accent-soft); border-color: transparent; }
+.card.ok { background: var(--ok-soft); border-color: transparent; }
+.card.warn { background: var(--warn-soft); border-color: transparent; }
+.card.risk { background: var(--risk-soft); border-color: transparent; }
+.card p, .card li { font-size: 12.5px; line-height: 1.65; color: var(--ink-2); margin: 0; }
+.card ul { margin: 6px 0 0; padding-left: 17px; }
+.card li { margin-bottom: 4px; }
+
+.kpis { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+.kpi { border: 1px solid var(--line); border-radius: var(--r-md); padding: 13px 18px; min-width: 132px; background: var(--surface); }
+.kpi b { display: block; font-family: var(--mono); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; }
+.kpi span { font-size: 11.5px; color: var(--ink-2); }
+.statusline { display: inline-flex; margin-top: 20px; font-size: 12px; font-weight: 500;
+  background: var(--warn-soft); color: var(--warn-ink); padding: 7px 12px; border-radius: var(--r-sm); }
+
+.pipeline { display: flex; margin: 28px 0 8px; }
+.pipe-step { flex: 1; text-align: center; position: relative; padding: 0 6px; }
+.pipe-step .dot { width: 46px; height: 46px; margin: 0 auto 10px; border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center; background: var(--accent-soft); color: var(--accent-ink); }
+.pipe-step b { display: block; font-size: 13.5px; font-weight: 600; }
+.pipe-step span { font-size: 12px; color: var(--ink-2); display: block; margin-top: 3px; line-height: 1.5; }
+.pipe-step:not(:last-child)::after { content: ""; position: absolute; top: 23px; right: -8px; width: 16px; height: 1px; background: var(--line-2); }
+.icon { width: 20px; height: 20px; flex: none; }
+
+.gloss { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.gloss dt { font-size: 13px; font-weight: 600; margin-bottom: 3px; display: flex; align-items: baseline; gap: 8px; }
+.gloss dt .en { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); font-weight: 400; }
+.gloss dd { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+
+.matrix { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+.mcol { border-radius: var(--r-md); padding: 14px 16px; border: 1px solid var(--line); }
+.mcol ul { margin: 8px 0 0; padding-left: 17px; }
+.mcol li { font-size: 12px; line-height: 1.6; color: var(--ink-2); margin-bottom: 5px; }
+.mcol .note { font-size: 11px; color: var(--ink-2); margin-top: 10px; border-top: 1px dashed var(--line-2); padding-top: 8px; }
+
+table.plain { width: 100%; border-collapse: collapse; font-size: 12.5px; background: var(--surface); }
+table.plain th { text-align: left; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-2); font-weight: 500; padding: 7px 10px;
+  border-bottom: 1px solid var(--line-2); background: var(--surface-3); white-space: nowrap; }
+table.plain td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; color: var(--ink-2); }
+table.plain td b { color: var(--ink-1); }
+table.plain tr:last-child td { border-bottom: none; }
+
+.ba { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.ba > div { padding: 12px 16px; font-size: 12px; line-height: 1.6; }
+.ba .before { background: var(--risk-soft); border-right: 1px solid var(--line); }
+.ba .after { background: var(--ok-soft); }
+.ba .label { display: block; font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+.ba .before .label { color: var(--risk-ink); }
+.ba .after .label { color: var(--ok-ink); }
+.ba code { font-family: var(--mono); font-size: 11px; word-break: break-all; }
+
+.qa4 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.qa4 .card h3 { display: flex; gap: 8px; align-items: center; }
+.qa4 .num { width: 20px; height: 20px; border-radius: var(--r-sm); background: var(--accent-ink); color: #fff;
+  font-family: var(--mono); font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.footnote { margin-top: 14px; font-size: 11px; color: var(--ink-2); }
+
+.card span.mono, .card code, .fix-body span.mono, .fix-body code { white-space: nowrap; }
+
+.card.soft span.mono, .card.soft code { white-space: normal; }
+@media (max-width: 860px) {
+  .grid2, .grid3, .matrix, .qa4, .ba, .gloss { grid-template-columns: 1fr; }
+  .pipeline { flex-direction: column; gap: 14px; }
+  .pipe-step:not(:last-child)::after { display: none; }
+  .page { padding: 64px 6vw 48px; }
+  .dots { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="crumb">
+    <span class="brand-tile">吉</span>
+    <b>jiojio Brand Design</b><span class="sep">›</span><span>Releases</span><span class="sep">›</span><b>vX.Y.Z</b>
+    <span class="ver-badge">Brief Slide</span>
+  </div>
+  <div class="meta">jiojio-lab/jiojio-brand-design · YYYY-MM</div>
+</header>
+
+<nav class="dots" id="dots"></nav>
+<div class="pagenum"><span id="pageNow">1</span>/<span id="pageTotal">?</span></div>
+
+<main class="snap" id="snap">
+
+  <!-- 1 封面:版本号 + 定位一句话 + KPI 数字块 + 状态横幅 -->
+  <section class="page" id="p1">
+    <div class="page-inner">
+      <div class="eyebrow">jiojio Brand Design · Release Brief</div>
+      <h1>Release <span class="mono" style="color:var(--accent)">vX.Y.Z</span><br/>[版本定位一句话]</h1>
+      <p class="lede">[两三句:本版做了什么,读者读完这份 brief 能得到什么。]</p>
+      <div class="kpis">
+        <div class="kpi"><b>N</b><span>[指标一]</span></div>
+        <div class="kpi"><b>N</b><span>[指标二]</span></div>
+      </div>
+      <div class="statusline">状态:[已上线 / 已合并待发布] —— 收益标注验证方法,不预支数字</div>
+    </div>
+  </section>
+
+  <!-- 2 产品/领域是什么:管道图或架构总览(单色 SVG) -->
+  <section class="page" id="p2">
+    <div class="page-inner">
+      <div class="eyebrow">01 · 概念对齐</div>
+      <h2>[产品/领域]是什么:[核心模型名]</h2>
+      <p class="lede">[一段话把领域模型立起来,后面所有变更都挂回这个模型。]</p>
+      <div class="pipeline">
+        <div class="pipe-step"><div class="dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/></svg></div><b>[环节]</b><span>[一句说明]</span></div>
+        <div class="pipe-step"><div class="dot"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/></svg></div><b>[环节]</b><span>[一句说明]</span></div>
+      </div>
+      <div class="grid2" style="margin-top:16px">
+        <div class="card accent"><h3>[关键认知]</h3><p>[模型的含义]</p></div>
+        <div class="card"><h3>[对本项目的意义]</h3><p>[落到业务]</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 名词解释:每条 = 是什么 + 本版为什么碰它 -->
+  <section class="page" id="p3">
+    <div class="page-inner">
+      <div class="eyebrow">02 · 本版新名词</div>
+      <h2>先把名词说清,再讲变更</h2>
+      <dl class="gloss">
+        <div class="card"><dt>[名词] <span class="en">[english term]</span></dt><dd>[是什么,一句人话]。<b>本版:</b>[为什么碰它]。</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 4 背景变量:为什么现在做 -->
+  <section class="page" id="p4">
+    <div class="page-inner">
+      <div class="eyebrow">03 · 背景</div>
+      <h2>[为什么是现在:外部环境/触发事件]</h2>
+      <p class="lede">[背景一段]</p>
+      <div class="grid3" style="margin-top:14px">
+        <div class="card risk"><h3>[现状/风险]</h3><ul><li>[要点]</li></ul></div>
+        <div class="card"><h3>[影响]</h3><p>[要点]</p></div>
+        <div class="card ok"><h3>[机会]</h3><p>[要点]</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 分类/优先级框架:为什么先做这些 -->
+  <section class="page" id="p5">
+    <div class="page-inner">
+      <div class="eyebrow">04 · 决策框架</div>
+      <h2>[按什么逻辑分优先级]</h2>
+      <div class="matrix">
+        <div class="mcol" style="background:var(--ok-soft)"><h3><span class="badge ok">A</span> [高优]</h3><ul><li>[项]</li></ul><div class="note">[= 本版内容]</div></div>
+        <div class="mcol" style="background:var(--warn-soft)"><h3><span class="badge warn">B</span> [中优]</h3><ul><li>[项]</li></ul><div class="note">[= 下版候选]</div></div>
+        <div class="mcol" style="background:var(--surface-2)"><h3><span class="badge ghost">C</span> [暂缓]</h3><ul><li>[项]</li></ul><div class="note">[暂缓理由]</div></div>
+      </div>
+      <p class="footnote">[排序逻辑一句话]</p>
+    </div>
+  </section>
+
+  <!-- 6 本版变更总表(压缩版 Before/After) -->
+  <section class="page" id="p6">
+    <div class="page-inner">
+      <div class="eyebrow">05 · 本版变更</div>
+      <h2>[N] 项变更:[上一版] → vX.Y.Z</h2>
+      <table class="plain" style="margin-top:12px">
+        <thead><tr><th>#</th><th>变更项</th><th>Before</th><th>After</th></tr></thead>
+        <tbody><tr><td class="mono">1</td><td><b>[项]</b></td><td>[before]</td><td>[after]</td></tr></tbody>
+      </table>
+      <p class="footnote">质量保障:[流程一行]。</p>
+    </div>
+  </section>
+
+  <!-- 7 代表性深挖:影响最大的一项,四问 -->
+  <section class="page" id="p7">
+    <div class="page-inner">
+      <div class="eyebrow">06 · 代表性详解</div>
+      <h2>影响面最大的一项:[标题]</h2>
+      <div class="ba" style="margin-top:10px">
+        <div class="before"><span class="label">Before</span><code>[修复前状态/代码]</code></div>
+        <div class="after"><span class="label">After</span><code>[修复后状态/代码]</code></div>
+      </div>
+      <div class="qa4">
+        <div class="card"><h3><span class="num">1</span>修了什么</h3><p>[内容]</p></div>
+        <div class="card"><h3><span class="num">2</span>为什么这样修</h3><p>[权衡]</p></div>
+        <div class="card risk"><h3><span class="num">3</span>不修会怎样</h3><p>[具体流失机制,禁套话]</p></div>
+        <div class="card ok"><h3><span class="num">4</span>delta 在哪</h3><p><b>确定性:</b>[机制]。<b>度量:</b>[指标+时间]。</p></div>
+      </div>
+      <p class="footnote">其余各项同格式四问详解,见 release 页面(vX.Y.Z-release.html)。</p>
+    </div>
+  </section>
+
+  <!-- 8 验证时间线 -->
+  <section class="page" id="p8">
+    <div class="page-inner">
+      <div class="eyebrow">07 · 验证方案</div>
+      <h2>Delta 怎么算数:验证时间线</h2>
+      <div class="grid3" style="margin-top:14px">
+        <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+0</span></h3><ul><li>[验证项]</li></ul></div>
+        <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+[短期]</span></h3><ul><li>[指标]</li></ul></div>
+        <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+[长期]</span></h3><ul><li>[指标]</li></ul></div>
+      </div>
+      <div class="card" style="margin-top:14px"><h3>归因纪律</h3><p>[一次只动一组变量,每个 release 在数据曲线上可归因。]</p></div>
+    </div>
+  </section>
+
+  <!-- 9 决策点 + 下一版 + 追溯 -->
+  <section class="page" id="p9">
+    <div class="page-inner">
+      <div class="eyebrow">08 · Next</div>
+      <h2>需要的决策,以及下一版预告</h2>
+      <div class="grid2" style="margin-top:14px">
+        <div class="card warn"><h3>需要拍板</h3><ul><li>[事项]</li></ul></div>
+        <div class="card"><h3>下一版候选</h3><ul><li>[项]</li></ul></div>
+      </div>
+      <div class="card accent" style="margin-top:14px"><h3>一句话总结</h3><p style="font-size:14px">[结论,加粗关键词]</p></div>
+      <p class="footnote mono">追溯:[相关文件/PR/Release 指针]</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var snap = document.getElementById('snap');
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var dots = document.getElementById('dots');
+  var now = document.getElementById('pageNow');
+  document.getElementById('pageTotal').textContent = pages.length;
+  pages.forEach(function (p, i) {
+    var a = document.createElement('a');
+    a.href = '#' + p.id;
+    a.setAttribute('aria-label', 'page ' + (i + 1));
+    a.addEventListener('click', function (e) { e.preventDefault(); pages[i].scrollIntoView(); });
+    dots.appendChild(a);
+  });
+  var links = Array.prototype.slice.call(dots.children);
+  function sync() {
+    var idx = Math.round(snap.scrollTop / window.innerHeight);
+    idx = Math.max(0, Math.min(pages.length - 1, idx));
+    links.forEach(function (l, i) { l.classList.toggle('on', i === idx); });
+    now.textContent = idx + 1;
+  }
+  snap.addEventListener('scroll', function () { requestAnimationFrame(sync); });
+  window.addEventListener('keydown', function (e) {
+    var idx = Math.round(snap.scrollTop / window.innerHeight);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault(); pages[Math.min(idx + 1, pages.length - 1)].scrollIntoView();
+    }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault(); pages[Math.max(idx - 1, 0)].scrollIntoView();
+    }
+    if (e.key === 'Home') { pages[0].scrollIntoView(); }
+    if (e.key === 'End') { pages[pages.length - 1].scrollIntoView(); }
+  });
+  function goHash() {
+    var el = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    if (el && el.classList.contains('page')) {
+      snap.style.scrollBehavior = 'auto'; el.scrollIntoView(); snap.style.scrollBehavior = ''; sync();
+    }
+  }
+  window.addEventListener('hashchange', goHash);
+  goHash();
+  sync();
+})();
+</script>
+</body>
+</html>

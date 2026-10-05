@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Release vX.Y.Z · Release Page · jiojio Brand Design</title>
+<style>
+:root {
+  --bg: #FAF8F2; --surface: #FFFFFF; --surface-2: #F3F1E9; --surface-3: #EDEAE0;
+  --ink-1: #16140F; --ink-2: #6B675C; --ink-3: #9B978B; --ink-4: #C2BFB2;
+  --line: #E0DDD1; --line-2: #C2BFB2;
+  --accent: #A07E58; --accent-soft: #E6DACB; --accent-ink: #5A442C;
+  --ok: #788C5D; --ok-soft: #E8EDDF; --warn: #C7923E; --warn-soft: #FDF3E3;
+  --risk: #C4453C; --risk-soft: #FCEEED;
+  /* text-on-soft variants: derived from the semantic hues, for 11-12px labels that must stay readable */
+  --ok-ink: #4A5A36; --warn-ink: #7A5514; --risk-ink: #8F2D26;
+  --r-sm: 6px; --r-md: 8px; --ease: cubic-bezier(.2,.7,.2,1);
+  --sans: -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+  --mono: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+b, strong { font-weight: 600; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink-1);
+  font-family: var(--sans); font-size: 14px; line-height: 1.6; }
+.mono { font-family: var(--mono); font-feature-settings: 'tnum'; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 80px; }
+
+.topbar { position: sticky; top: 0; z-index: 10; height: 44px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+  border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.94); }
+.crumb { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
+.brand-tile { width: 22px; height: 22px; border-radius: var(--r-sm); background: var(--accent);
+  color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+.crumb b { color: var(--ink-1); font-weight: 600; }
+.crumb .sep { color: var(--ink-4); }
+.ver-badge { font-family: var(--mono); font-size: 10.5px; color: var(--accent-ink);
+  background: var(--accent-soft); border-radius: 99px; padding: 2px 9px; font-weight: 500; }
+.topbar .meta { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+
+.hero { padding: 48px 0 8px; }
+h1 { margin: 0; font-size: 34px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; }
+p.lede { color: var(--ink-2); font-size: 14.5px; line-height: 1.7; margin: 12px 0 0; }
+.statusline { display: inline-flex; margin-top: 16px; font-size: 12px; font-weight: 500;
+  background: var(--warn-soft); color: var(--warn-ink); padding: 6px 12px; border-radius: var(--r-sm); }
+
+section.seg { margin-top: 44px; }
+.seg-head { display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line-2); padding-bottom: 8px; margin-bottom: 16px; }
+.seg-head .no { font-family: var(--mono); font-size: 13px; color: var(--accent-ink); font-weight: 600; }
+.seg-head h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+h3 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+.sub { color: var(--ink-2); font-size: 12.5px; line-height: 1.6; }
+
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 99px; vertical-align: middle; }
+.badge.accent { background: var(--accent-soft); color: var(--accent-ink); }
+.badge.ok { background: var(--ok-soft); color: var(--ok-ink); }
+.badge.warn { background: var(--warn-soft); color: var(--warn-ink); }
+.badge.risk { background: var(--risk-soft); color: var(--risk-ink); }
+.badge.ghost { background: var(--surface-3); color: var(--ink-2); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 16px; background: var(--surface); }
+.card.soft { background: var(--surface-2); border-color: transparent; }
+.card.accent { background: var(--accent-soft); border-color: transparent; }
+.card.ok { background: var(--ok-soft); border-color: transparent; }
+.card.warn { background: var(--warn-soft); border-color: transparent; }
+.card.risk { background: var(--risk-soft); border-color: transparent; }
+.card p, .card li { font-size: 12.5px; line-height: 1.65; color: var(--ink-2); margin: 0; }
+.card ul { margin: 6px 0 0; padding-left: 17px; }
+.card li { margin-bottom: 4px; }
+
+table.plain { width: 100%; border-collapse: collapse; font-size: 12.5px; background: var(--surface); }
+table.plain th { text-align: left; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-2); font-weight: 500; padding: 7px 10px;
+  border-bottom: 1px solid var(--line-2); background: var(--surface-3); white-space: nowrap; }
+table.plain td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.55; color: var(--ink-2); }
+table.plain td b { color: var(--ink-1); }
+table.plain tr:last-child td { border-bottom: none; }
+code, .codechip { font-family: var(--mono); font-size: 0.92em; }
+.codechip { background: var(--surface-3); border-radius: 4px; padding: 1px 6px; font-size: 11.5px; white-space: nowrap; }
+
+.gloss { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gloss dt { font-size: 13px; font-weight: 600; margin-bottom: 3px; display: flex; align-items: baseline; gap: 8px; }
+.gloss dt .en { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); font-weight: 400; }
+.gloss dd { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+
+.fix { border: 1px solid var(--line); border-radius: var(--r-md); margin-bottom: 14px; overflow: hidden; background: var(--surface); }
+.fix-head { display: flex; align-items: center; gap: 10px; padding: 11px 16px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.fix-head .fno { font-family: var(--mono); font-size: 11px; color: var(--accent-ink); font-weight: 600; }
+.fix-head b { font-size: 13.5px; }
+.fix-head .loc { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: auto; }
+.fix-body { display: grid; grid-template-columns: 1fr 1fr; }
+.fix-body > div { padding: 11px 16px; font-size: 12.5px; line-height: 1.65; color: var(--ink-2); border-bottom: 1px solid var(--line); }
+.fix-body > div:nth-child(odd) { border-right: 1px solid var(--line); }
+.fix-body > div:nth-last-child(-n+2) { border-bottom: none; }
+.fix-body .q { display: block; font-family: var(--mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
+.fix-body .bleed .q { color: var(--risk-ink); }
+.fix-body .delta .q { color: var(--ok-ink); }
+.footnote { margin-top: 12px; font-size: 11px; color: var(--ink-2); }
+
+.card span.mono, .card code, .fix-body span.mono, .fix-body code { white-space: nowrap; }
+
+.card.soft span.mono, .card.soft code { white-space: normal; }
+@media (max-width: 760px) {
+  .grid2, .grid3, .gloss, .fix-body { grid-template-columns: 1fr; }
+  .fix-body > div:nth-child(odd) { border-right: none; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="crumb">
+    <span class="brand-tile">吉</span>
+    <b>jiojio Brand Design</b><span class="sep">›</span><span>Releases</span><span class="sep">›</span><b>vX.Y.Z</b>
+    <span class="ver-badge">Release Page</span>
+  </div>
+  <div class="meta">jiojio-lab/jiojio-brand-design · YYYY-MM</div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Release <span class="mono" style="color:var(--accent)">vX.Y.Z</span> — [版本定位一句话]</h1>
+    <p class="lede">[两三句:本版做了什么,相对上一版变了什么。宏观简报见 vX.Y.Z-brief-slide.html。]</p>
+    <div class="statusline">状态:[已上线 / 已合并待发布]</div>
+  </div>
+
+  <!-- 九段结构:01 元数据 / 02 一句话 diff / 03 名词解释 / 04 变更总表 / 05 逐项详解 / 06 质量评审 / 07 验证时间线 / 08 决策点 / 09 下一版与追溯 -->
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">01</span><h2>版本元数据</h2></div>
+    <table class="plain"><tbody>
+      <tr><td style="width:130px"><b>版本号</b></td><td class="mono">vX.Y.Z</td></tr>
+      <tr><td><b>类型</b></td><td>[源码调整 / 词库调整 / 内容系统]</td></tr>
+      <tr><td><b>对比基线</b></td><td class="mono">[上一版本号]</td></tr>
+      <tr><td><b>代码</b></td><td class="mono">[repo PR #N]</td></tr>
+      <tr><td><b>风险级别</b></td><td><span class="badge ok">低</span> [一句话]</td></tr>
+      <tr><td><b>评审</b></td><td>[评审方式与结论]</td></tr>
+    </tbody></table>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">02</span><h2>一句话 diff:[上一版] → vX.Y.Z</h2></div>
+    <div class="grid2">
+      <div class="card"><ul><li><b>[领域一]:</b>[before → after]</li></ul></div>
+      <div class="card"><ul><li><b>[领域二]:</b>[before → after]</li></ul></div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">03</span><h2>名词解释(涉及新技术时必填;先说清,再讲变更)</h2></div>
+    <dl class="gloss">
+      <div class="card"><dt>[名词] <span class="en">[english term]</span></dt><dd>[它是什么,一句人话]。</dd></div>
+    </dl>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">04</span><h2>变更总表</h2></div>
+    <table class="plain">
+      <thead><tr><th>#</th><th>变更项</th><th>位置</th><th>Before</th><th>After</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">F1</td><td><b>[变更项]</b></td><td class="mono">[位置]</td><td>[before]</td><td>[after]</td></tr>
+      </tbody>
+    </table>
+    <p class="footnote">[本版有意不包含的范围 + 原因(归因纪律)]</p>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">05</span><h2>逐项详解(四问)</h2></div>
+    <div class="fix">
+      <div class="fix-head"><span class="fno">F1</span><b>[变更标题]</b><span class="loc">[文件]</span></div>
+      <div class="fix-body">
+        <div><span class="q">修了什么</span>[改动内容]</div>
+        <div><span class="q">为什么这样修</span>[方案与权衡]</div>
+        <div class="bleed"><span class="q">不修会怎样</span>[具体流失机制,不写套话]</div>
+        <div class="delta"><span class="q">delta</span>[确定性变化 + 度量方式]</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">06</span><h2>质量与评审</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>流程</h3><p>[入库/分支/校验/评审/合并]</p></div>
+      <div class="card"><h3>评审结论</h3><p>[verdict + 修订落地情况]</p></div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">07</span><h2>验证时间线(不预支数字)</h2></div>
+    <div class="grid3">
+      <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+0</span></h3><ul><li>[验证项]</li></ul></div>
+      <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+2~6w</span></h3><ul><li>[指标]</li></ul></div>
+      <div class="card soft"><h3><span class="mono" style="color:var(--accent-ink)">T+1~3m</span></h3><ul><li>[指标]</li></ul></div>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">08</span><h2>决策点</h2></div>
+    <div class="card warn"><ul><li><b>[待拍板事项]</b></li></ul></div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-head"><span class="no">09</span><h2>下一版与追溯</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>下一版候选</h3><ul><li>[候选项]</li></ul></div>
+      <div class="card"><h3>追溯</h3><ul class="mono" style="font-size:11.5px"><li>[相关文件/PR/Release 链接]</li></ul></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
