@@ -35,16 +35,19 @@ Fonts come from Google Fonts and React from unpkg, so the first load needs a net
 
 The whole system follows one idea: **remove the noise between a person and the thing they are trying to do.**
 Everything below is a consequence of that.
+
 整个系统只有一个出发点:**把人和他要做的事之间的噪音去掉。** 下面所有规则都是这个出发点的推论。
 
 ### Paper and Bark · 纸与树皮
 
 The canvas is never pure white or pure black. Light mode sits on **Paper** `#FAF8F2`, a warm off-white; dark mode sits on **Bark** `#2D271C`, a warm brown-black. Surfaces step up one tier at a time from the canvas, and borders are hairlines that are visible but quiet.
+
 底色不用纯白或纯黑。亮色模式是暖米色的 **Paper**,暗色模式是暖棕黑的 **Bark**。表面一层比一层亮一级,分割线细到刚好能看见。
 
 ### One accent, with a rule · 一个强调色,一条规则
 
 The accent is **Fawn** `#A07E58`, a muted deer-hide brown. It is the only saturated color on the page, and it has a job: **Fawn means output or interaction** — primary buttons, selected states, focus rings, computed totals. **Ink** `#16140F` means **input or fact** — body copy, labels, values the user typed. Info, success, warning and danger exist, but they are tuned to the same lightness so none of them shout.
+
 强调色是 **Fawn**(鹿皮棕),页面上唯一的饱和色,并且有明确分工:**Fawn = 输出与交互**,**Ink = 输入与事实**。四个语义色(信息 / 成功 / 警告 / 危险)调到同一亮度,谁也不抢戏。
 
 ### Three faces · 三副字体
@@ -57,11 +60,13 @@ The accent is **Fawn** `#A07E58`, a muted deer-hide brown. It is the only satura
 | Wordmark | **EB Garamond**, weight 500 | Only for the `jio` wordmark; never used for body text |
 
 Chinese falls back to Noto Sans SC and Noto Serif SC. English and Chinese sit side by side everywhere in the system, English leading, Chinese as the quieter second line.
+
 中英并排是系统的常态:英文在前,中文作为更安静的第二行。
 
 ### The logo · 标识
 
 Two pieces. The wordmark `jio`, lowercase, set in EB Garamond. The seal 吉 on a rounded square. Both read their color from a single token, `--accent`, so changing the theme recolors the logo with no hand-syncing. The wordmark is the default; the seal is reserved for favicon, avatar and other small iconic contexts.
+
 字标 `jio` 小写、EB Garamond;印章 **吉** 置于圆角方块。两者的颜色都绑在同一个 token 上,换主题时自动跟随。
 
 <p align="center">
@@ -71,6 +76,7 @@ Two pieces. The wordmark `jio`, lowercase, set in EB Garamond. The seal 吉 on a
 ### Tokens first · 令牌优先
 
 Colors, radii, shadows and type live in a three-layer token architecture: **primitive → semantic → component**. Components reach into the scale and never invent intermediate values. The Tokens tab exports the whole registry as W3C Design Tokens JSON or plain CSS variables.
+
 颜色、圆角、投影、字体都走三层令牌:原始值 → 语义 → 组件。组件只取阶梯上的值,不自造中间值。
 
 ### What we refuse to do · 永远不做的事
