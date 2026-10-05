@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Changed
+- Logo color is now its own token `--accent-logo`: Fawn Deep `#7A5E3E` on Paper, Fawn `#A07E58` on Bark (jiojio decision 2026-10-05, matches `logo-final.html`). Wordmark, seal, clear-space and size-ladder diagrams, and the sidebar signature read from it; a non-canonical accent in the swatcher still carries the logo along.
+- `index.html` loads the React 18.3.1 production builds from unpkg (SRI hashes recomputed) instead of the development builds.
+
 ## [2.0.0] - 2026-10-05
 
 首个 release，没有 baseline tag，对比基线为 Initial commit `152069e`。统计范围：产品基线统计截至 633fe9c(`29 files, +4164/−1`)；发布文档包另计（本分支 HEAD 对 152069e 为 `37 files, +7043/−1`）。详见 [`docs/releases/v2.0.0-release.html`](docs/releases/v2.0.0-release.html)。
