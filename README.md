@@ -18,9 +18,9 @@
 
 ## 一图看懂 · At a glance
 
-Twelve tabs in four groups, read top to bottom: Brand sets direction, Foundations supplies the raw material, UI assembles it into components, UX keeps it usable. Every color and size flows through three token layers (bottom row), so one change reaches the logo and the buttons together.
+Twelve tabs in four groups, read top to bottom: Brand sets direction, Foundations supplies the raw material, UI assembles it into components, UX keeps it usable. Shared values such as the accent flow through three token layers (bottom row), so one theme change reaches the logo and the buttons together; some component sizes are still written inline.
 
-十二个 tab 分四组:Brand 定方向,Foundations 给原料,UI 搭组件,UX 保体验。所有颜色和尺寸都经过三层令牌传递,改一处,logo 和按钮一起变。
+十二个 tab 分四组:Brand 定方向,Foundations 给原料,UI 搭组件,UX 保体验。主题色等共享值经三层令牌联动,改一处,logo 和按钮一起变;组件内部仍有直接写入的尺寸。
 
 ```mermaid
 flowchart TB

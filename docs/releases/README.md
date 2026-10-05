@@ -14,10 +14,10 @@
 
 1. **定版**：用 `git log` 找到上一个 release tag 以来的全部变更，按 semver 定版本号。MAJOR = 设计语言或结构级变更，MINOR = 一批功能性变更，PATCH = 单点小修。首个 release（v2.0.0）没有 baseline tag，以 Initial commit 为对比基线。
 2. **写三件套**：从 `templates/` 起笔，写 `vX.Y.Z-release.html`、`vX.Y.Z-brief-slide.html`、`vX.Y.Z-release-notes.md`。所有数字（文件数、行数、SHA、日期、tab 数）用 `git log` / `git diff --stat` / `wc -l` 核对，不凭记忆。
-3. **刷新 README 与 CHANGELOG**:README 的「一图看懂」是 Mermaid 图，随版本检查是否仍符合 `src/app.jsx` 的 TABS;CHANGELOG 按 Keep a Changelog 补本版条目。
+3. **刷新 README 与 CHANGELOG**：README 的「一图看懂」是 Mermaid 图，随版本检查是否仍符合 `src/app.jsx` 的 TABS；CHANGELOG 按 Keep a Changelog 补本版条目。
 4. **查验**：用无头 Chrome 逐页截图（brief-slide 每页一张，release 页整页），再把两个 HTML 单独拷到空目录打开一次，确认没有裂图和外链。
-5. **评审**:cross-model 评审结论回填到 release.html 的 06 段与 notes。
-6. **打 tag + 建 Release**:`gh release create vX.Y.Z`,assets 挂两个 HTML 与源码 zip;tag SHA 与 zip 的 SHA-256 回填到 notes 与本表。
+5. **评审**：cross-model 评审结论回填到 release.html 的 06 段与 notes。
+6. **打 tag + 建 Release**：`gh release create vX.Y.Z`，assets 挂两个 HTML 与源码 zip；tag SHA 与 zip 的 SHA-256 回填到 notes 与本表。
 
 回滚：本仓库是静态文档仓库，没有部署对象和数据库。回滚 = checkout 上一个 tag，或对问题 commit 做 `git revert`。
 
@@ -36,4 +36,4 @@ brief-slide 支持 `#p1` 到 `#pN` 锚点直达，键盘上下左右、PageUp/Pa
 
 | 版本 | 日期 | 状态 | 类型 | release 页面 | brief-slide | notes |
 |---|---|---|---|---|---|---|
-| v2.0.0 | 2026-10-05 | 已发布（tag 待回填） | 首发：设计系统本体 + 公开化收口 | [release](v2.0.0-release.html) | [brief](v2.0.0-brief-slide.html) | [notes](v2.0.0-release-notes.md) |
+| v2.0.0 | 2026-10-05 | tag 已打，Release 创建中，发布物 PR 待合并 | 首发：设计系统本体 + 公开化收口 | [release](v2.0.0-release.html) | [brief](v2.0.0-brief-slide.html) | [notes](v2.0.0-release-notes.md) |

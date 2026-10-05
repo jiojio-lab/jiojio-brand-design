@@ -6,7 +6,7 @@
 
 ## [2.0.0] - 2026-10-05
 
-首个 release，没有 baseline tag，对比基线为 Initial commit `152069e`（`git diff --stat 152069e 633fe9c` 的结果是 `29 files changed, 4164 insertions(+), 1 deletion(-)`）。详见 [`docs/releases/v2.0.0-release.html`](docs/releases/v2.0.0-release.html)。
+首个 release，没有 baseline tag，对比基线为 Initial commit `152069e`。统计范围：产品基线统计截至 633fe9c(`29 files, +4164/−1`)；发布文档包另计（本分支 HEAD 对 152069e 为 `37 files, +7043/−1`）。详见 [`docs/releases/v2.0.0-release.html`](docs/releases/v2.0.0-release.html)。
 
 ### Added
 
@@ -26,7 +26,7 @@
 
 ### Security
 
-- 转 public 前的隐私审计（逐文件加全历史扫描，无密钥、路径、真人信息）发现两项并处理：两个早期 commit 的作者邮箱改为 GitHub noreply 地址（`git filter-repo --mailmap`），旧 README 里的个人账号 clone URL 改为组织地址（`--replace-text`）；两项均全史重写并 force push。遗留：重写前的旧 commit SHA 仍可按 URL 访问，需向 GitHub support 申请清除；账号未开启邮箱隐私，GitHub 服务端生成的 merge commit 会再次带出邮箱。
+- 转 public 前的隐私审计（逐文件加全历史扫描，无密钥、路径、真人信息）发现两项并处理（据总工程师 2026-10-05 session 记录，未在本次评审中复核）：两个早期 commit 的作者邮箱改为 GitHub noreply 地址（`git filter-repo --mailmap`），旧 README 里的个人账号 clone URL 改为组织地址（`--replace-text`）；两项均全史重写并 force push。当前可达 commit 的作者/提交者邮箱均为 noreply 地址（GitHub 与 Anthropic 两个域名）。遗留：重写前的旧 commit SHA 仍可按 URL 访问，需向 GitHub support 申请清除；账号未开启邮箱隐私，GitHub 服务端生成的 merge commit 会再次带出邮箱。
 
 [Unreleased]: https://github.com/jiojio-lab/jiojio-brand-design/compare/v2.0.0...HEAD
 [2.0.0]: https://github.com/jiojio-lab/jiojio-brand-design/releases/tag/v2.0.0
